@@ -1,13 +1,13 @@
-package com.c1538njavareact.demo;
+package com.c1538njavareact.serviLink;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class ServiLink {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(ServiLink.class, args);
 	}
 
 }
