@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity(name = "ServiceProvider")
@@ -21,6 +22,7 @@ public class ServiceProvider {
     @Column(name = "services_provider_id")
     private Long id;
     private String description;
+    private BigDecimal price;
     @ManyToOne
     @JoinColumn(name = "providers_id", nullable = false)
     private  Provider providers;
