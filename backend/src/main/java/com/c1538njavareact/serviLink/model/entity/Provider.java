@@ -1,36 +1,39 @@
 package com.c1538njavareact.serviLink.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "Provider")
+@Table(name = "providers")
 @Getter
-@NoArgsConstructor
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Provider implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "providers_id", unique = true)
     private Long id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(unique = true)
     private String email;
     private String password;
+    @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "profile_image_url")
     private String profileImageUrl;
+    @OneToMany(mappedBy = "providers", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ServiceProvider> serviceProviderList;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -66,4 +69,5 @@ public class Provider implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
 }

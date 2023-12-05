@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.c15-38-n-java-react</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>serviLink</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<name>serviLink</name>
 	<description>React and Java demo project for No Country</description>
 	<properties>
 		<java.version>17</java.version>
