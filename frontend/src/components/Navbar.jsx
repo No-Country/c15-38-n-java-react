@@ -13,7 +13,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <img
             className="w-6 xl:w-8"
-            src="/public/images/logo.svg"
+            src="/images/logo.svg"
             alt="Logo"
           />
           <span className="hidden text-xl font-medium md:block ">
@@ -22,10 +22,10 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-4">
-          <button className="text-white text-xs lg:text-base bg-black rounded-lg w-[60px] h-[30px] lg:w-[98px] lg:h-[40px]">
+          <button className="text-white text-xs lg:text-base bg-black rounded-lg w-[70px] h-[30px] lg:w-[98px] lg:h-[40px]">
             Log in
           </button>
-          <button className="rounded-lg w-[60px] h-[30px] lg:w-[98px] lg:h-[40px] border-2 border-black text-xs lg:text-base">
+          <button className="rounded-lg w-[70px] h-[30px] lg:w-[98px] lg:h-[40px] border-2 border-black text-xs lg:text-base">
             Sign Up
           </button>
         </div>
