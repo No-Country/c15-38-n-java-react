@@ -45,7 +45,9 @@ public class SecurityConfigurations {
             "/swagger-ui/**",
             "/docs",
             "/signup",
-            "/login"
+            "/login",
+            "/api/service/get-all-services",
+            "/api/service-category/get-all-categories"
     };
 
     @Bean
