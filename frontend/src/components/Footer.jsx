@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function Footer() {
+  const [year] = useState(new Date().getFullYear());
+  
   return (
+
+    
+
     <footer className="xl:max-w-[80rem] 2xl:max-w-[90rem] mx-auto px-4 md:px-10 lg:px-0 mt-auto lg:max-w-[59rem]">
       <div className="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2">
@@ -110,7 +116,7 @@ export default function Footer() {
 
       <div className="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row">
         <p className="text-sm text-gray-600">
-          © Copyright 2023 ServiLink Inc. Todos los derechos reservados.
+          © Copyright {year} ServiLink Inc. Todos los derechos reservados.
         </p>
         <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
           <li>

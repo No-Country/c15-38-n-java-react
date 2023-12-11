@@ -9,7 +9,7 @@ const ServiceCard = ({ title, image, additionalContent }) => (
     />
 
     <div className="flex justify-between">
-      <p className="text-lg font-semibold font-SourceSansPro dark:text-portfolio-background-color">
+      <p className="font-medium font-SourceSansPro dark:text-portfolio-background-color">
         {title}
       </p>
     </div>
