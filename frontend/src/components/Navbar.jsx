@@ -45,14 +45,13 @@ export default function Navbar() {
         <div className="mt-6 overflow-x-auto hide-scrollbar">
           <ul className="flex space-x-4">
             {services.map((service, index) => (
-              <li key={index}>
-                <Link
-                  to={service.to}
-                  className="flex-shrink-0 w-full px-4 py-2 bg-gray-200 rounded"
-                >
-                  {service.label}
-                </Link>
-              </li>
+              <Link
+                key={index}
+                to={service.to}
+                className="flex-shrink-0 px-4 py-2 bg-gray-200 rounded"
+              >
+                {service.label}
+              </Link>
             ))}
           </ul>
         </div>
