@@ -43,7 +43,15 @@ public class SecurityConfigurations {
             "/api/public/authenticate",
             "/actuator/*",
             "/swagger-ui/**",
+<<<<<<< HEAD
             "/docs"
+=======
+            "/docs",
+            "/signup",
+            "/login",
+            "/api/service/get-all-services",
+            "/api/service-category/get-all-categories"
+>>>>>>> bd0dc7b287fdc1e4a4b6cf94818ccd2d8ebf9af2
     };
 
     @Bean
