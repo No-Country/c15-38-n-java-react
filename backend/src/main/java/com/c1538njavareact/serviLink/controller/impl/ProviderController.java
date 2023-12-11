@@ -3,34 +3,34 @@ package com.c1538njavareact.serviLink.controller.impl;
 import com.c1538njavareact.serviLink.controller.IProviderController;
 import com.c1538njavareact.serviLink.model.dto.ProviderDataGetOne;
 import com.c1538njavareact.serviLink.model.dto.ProviderDataUpdate;
-import com.c1538njavareact.serviLink.model.dto.UserDataLogin;
 import com.c1538njavareact.serviLink.service.IProviderService;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.c1538njavareact.serviLink.config.ApiConstants.PROVIDER_URI;
+
 @RestController
-@RequestMapping("api/provider")
-public class ProviderController {
+@RequestMapping(PROVIDER_URI)
+public class ProviderController implements IProviderController {
     @Autowired
     IProviderService providerService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProviderDataGetOne> getOne(@PathVariable Long id) {
+    @Override
+    public ResponseEntity<ProviderDataGetOne> getOne(Long id) {
         return providerService.getByUserId(id);
     }
 
-    @PutMapping("/{id}")
+    @Override
     @Transactional
-    public ResponseEntity<ProviderDataGetOne> updateProvider(@PathVariable Long id, @Valid ProviderDataUpdate providerDataUpdate) {
+    public ResponseEntity<ProviderDataGetOne> updateProvider(Long id, ProviderDataUpdate providerDataUpdate) {
         return providerService.updateProvider(id, providerDataUpdate);
     }
 
-    @DeleteMapping("/{id}")
+    @Override
     @Transactional
-    public ResponseEntity deactivateProvider(@PathVariable Long id) {
+    public ResponseEntity deactivateProvider(Long id) {
         return providerService.deactivateProvider(id);
     }
 

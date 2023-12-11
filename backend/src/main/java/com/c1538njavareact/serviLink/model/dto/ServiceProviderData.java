@@ -5,5 +5,5 @@ import com.c1538njavareact.serviLink.model.entity.Service;
 
 import java.math.BigDecimal;
 
-public record ServiceProviderData(Long id, Provider provider, Service service, String description, BigDecimal price) {
+public record ServiceProviderData(Long id, ProviderDataGetOne providerDataGetOne, Service service, String description, BigDecimal price) {
 }
