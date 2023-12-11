@@ -43,9 +43,7 @@ public class SecurityConfigurations {
             "/api/public/authenticate",
             "/actuator/*",
             "/swagger-ui/**",
-            "/docs",
-            "/signup",
-            "/login"
+            "/docs"
     };
 
     @Bean
@@ -56,7 +54,8 @@ public class SecurityConfigurations {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         );
         httpSecurity.authorizeHttpRequests(authHttpRequests -> authHttpRequests
-                .requestMatchers(antMatcher(HttpMethod.POST, "/api/auth/**")).permitAll()
+                .requestMatchers(HttpMethod.POST,"api/auth/signup", "api/auth/login", "api/auth/resetPassword",
+                        "api/auth/changePassword").permitAll()
                 .requestMatchers(HttpMethod.GET, AUTH_WHITELIST).permitAll()
                 .anyRequest()
                 .authenticated()

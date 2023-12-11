@@ -1,11 +1,13 @@
 package com.c1538njavareact.serviLink.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Entity(name = "ServiceCategory")
 @Table(name = "services_category")
 @Getter
+@AllArgsConstructor
 public class ServiceCategory {
 
     @Id

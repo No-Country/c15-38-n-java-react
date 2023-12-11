@@ -19,13 +19,12 @@ public class JWTUtil {
     @Value("${api.security.secret}")
     private String apiSecret;
 
-    public String generateToken(Provider provider) {
+    public String generateToken(String subject) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);
             return  JWT.create()
                     .withIssuer("servilink")
-                    .withSubject(provider.getEmail())
-                    .withClaim("id", provider.getId())
+                    .withSubject(subject)
                     .withExpiresAt(generateExpirationDate())
                     .sign(algorithm);
         } catch (JWTCreationException exception){
@@ -41,7 +40,7 @@ public class JWTUtil {
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);
             verifier = JWT.require(algorithm)
-                    .withIssuer("voll clinic")
+                    .withIssuer("servilink")
                     .build()
                     .verify(token);
             verifier.getSubject();

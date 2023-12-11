@@ -1,5 +1,6 @@
 package com.c1538njavareact.serviLink.security;
 
+import com.c1538njavareact.serviLink.repository.UserRepository;
 import com.c1538njavareact.serviLink.utils.JWTUtil;
 import com.c1538njavareact.serviLink.repository.ProviderRepository;
 import jakarta.servlet.FilterChain;
@@ -20,7 +21,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     private JWTUtil jwtService;
     @Autowired
-    private ProviderRepository providerRepository;
+    private UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -28,9 +29,9 @@ public class SecurityFilter extends OncePerRequestFilter {
         var authHeader = request.getHeader("Authorization");
         if (authHeader != null) {
             var token = authHeader.replace("Bearer ", "");
-            var email = jwtService.getSubject(token); // extract email
-            if (email != null) { // Valid token
-                UserDetails user = providerRepository.findByEmail(email);
+            var username = jwtService.getSubject(token); // extract username
+            if (username != null) { // Valid token
+                UserDetails user = userRepository.findByUsername(username);
                 var authentication = new UsernamePasswordAuthenticationToken(user, null,
                         user.getAuthorities()); // Forced login
                 SecurityContextHolder.getContext().setAuthentication(authentication);

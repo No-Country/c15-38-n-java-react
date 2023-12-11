@@ -14,9 +14,9 @@ public class OpenAPIConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Demo API")
+                        .title("Servilink API")
                         .version("v0.01")
-                        .description("Documentation Demo API v0.01")
+                        .description("Documentation Servilink API v0.01")
                         .termsOfService("http://swagger.io/terms/")
                         .license(new License()
                                 .name("Apache 2.0")
