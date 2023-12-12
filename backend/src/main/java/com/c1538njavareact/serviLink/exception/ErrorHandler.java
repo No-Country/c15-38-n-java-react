@@ -10,4 +10,8 @@ public class ErrorHandler {
     public ResponseEntity errorHandlerIntegrityValidation(Exception e){
         return ResponseEntity.badRequest().body(e.getMessage());
     }
+    @ExceptionHandler(AuthValidation.class)
+    public ResponseEntity errorHandlerAuthValidation(Exception e){
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
 }
