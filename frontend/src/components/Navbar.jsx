@@ -6,7 +6,7 @@ export default function Navbar() {
   const isSignUpPage = location.pathname === "/signUp";
 
   const services = [
-    { to: "/", label: "Testing" },
+    { to: "/", label: "Limpieza del hogar" },
     { to: "/gardeningServices", label: "Mantenimiento del jardín" },
     { to: "/homeOrganization", label: "Organización del hogar" },
   ];
@@ -18,7 +18,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <img
               className="w-6 xl:w-8"
-              src="/images/logo.svg"
+              src="/logo.svg"
               alt="Logo"
             />
             <span className="hidden text-xl font-medium md:block ">
