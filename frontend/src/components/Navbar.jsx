@@ -6,7 +6,7 @@ export default function Navbar() {
   const isSignUpPage = location.pathname === "/signUp";
 
   const services = [
-    { to: "/", label: "Limpieza del hogar" },
+    { to: "/", label: "Testing" },
     { to: "/gardeningServices", label: "Mantenimiento del jardín" },
     { to: "/homeOrganization", label: "Organización del hogar" },
   ];
