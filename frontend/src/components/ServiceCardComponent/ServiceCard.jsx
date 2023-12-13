@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 
 const ServiceCard = ({ title, image, additionalContent }) => (
-  <div>
+  <div className="w-full">
     <img
-      className="object-center w-full mb-4 transition duration-300 ease-in-out shadow-md lg:h-48 md:h-36 rounded-xl hover:scale-110"
+      className="object-cover w-full rounded-lg h-60"
       src={image}
       alt={title}
     />

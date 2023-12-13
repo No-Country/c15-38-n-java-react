@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function LogIn() {
   return (
-    <div class="flex justify-center">
+    <div className="flex justify-center">
       <section className="border rounded-2xl w-[480px] p-[48px]">
         <div>
           <h1 className="text-3xl font-bold">Log in</h1>
@@ -10,44 +10,60 @@ export default function LogIn() {
         <div>
           <from>
             <div>
-              <div class="h-[54px] flex items-end justify-between">
-                <label for="email" className="text-base font-semibold">Email</label>
-                <span class="text-sm font-normal">
+              <div className="h-[54px] flex items-end justify-between">
+                <label
+                  htmlFor="email"
+                  className="text-base font-semibold"
+                >
+                  Email
+                </label>
+                <span className="text-sm font-normal">
                   Need an account?
                   <Link to="/signUp">
-                    <span class="ml-[6px] font-semibold">Sign up</span>
+                    <span className="ml-[6px] font-semibold">Sign up</span>
                   </Link>
                 </span>
               </div>
-              <div class="h-[51px]">
-                <input type="text" name="email" className="w-full h-full border rounded p-[14px]"></input>
+              <div className="h-[51px]">
+                <input
+                  type="text"
+                  name="email"
+                  className="w-full h-full border rounded p-[14px]"
+                ></input>
               </div>
             </div>
             <div>
-              <div class="h-[54px] flex items-end justify-between">
-                <label for="current-password" className="text-base font-semibold">Password</label>
-                <span class="text-sm font-semibold">
+              <div className="h-[54px] flex items-end justify-between">
+                <label
+                  htmlFor="current-password"
+                  className="text-base font-semibold"
+                >
+                  Password
+                </label>
+                <span className="text-sm font-semibold">
                   {/*<svg></svg>*/}
                   Show
                 </span>
               </div>
-              <div class="h-[51px]">
-                <input type="text" name="email" className="w-full h-full border rounded p-[14px]"></input>
+              <div className="h-[51px]">
+                <input
+                  type="text"
+                  name="email"
+                  className="w-full h-full border rounded p-[14px]"
+                ></input>
               </div>
-              <div class="h-[24px] my-[18px] text-sm font-normal text-center">
+              <div className="h-[24px] my-[18px] text-sm font-normal text-center">
                 <a>Forgot password?</a>
               </div>
             </div>
-            <div>
+            <Link to="/providerDashboard">
               <button className="bg-black border rounded w-full h-[50px] text-lg text-white">
                 Log in
               </button>
-            </div>
+            </Link>
           </from>
-          <div class="my-[18px] text-center">
-            <span>
-              -- or --
-            </span>
+          <div className="my-[18px] text-center">
+            <span>-- or --</span>
           </div>
           <div>
             <button className="bg-white border rounded w-full h-[50px] text-base text-black">
