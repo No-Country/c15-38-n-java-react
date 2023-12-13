@@ -1,11 +1,9 @@
 package com.c1538njavareact.serviLink.model.entity;
 
+import com.c1538njavareact.serviLink.model.dto.ProviderDataUpdate;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import java.util.Collection;
+
 import java.util.List;
 
 @Entity(name = "Provider")
@@ -15,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Provider implements UserDetails {
+public class Provider {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,47 +25,43 @@ public class Provider implements UserDetails {
     private String lastName;
     @Column(unique = true)
     private String email;
-    private String password;
     @Column(name = "phone_number")
     private String phoneNumber;
     @Column(name = "profile_image_url")
     private String profileImageUrl;
-    @OneToMany(mappedBy = "providers", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(nullable = false)
+    private boolean isActive = true;
+
+    @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ServiceProvider> serviceProviderList;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    @OneToOne(orphanRemoval = true)
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public Provider(String firstName, String email, User user) {
+        this.firstName = firstName;
+        this.email = email;
+        this.user = user;
     }
 
-    @Override
-    public String getPassword() {
-        return null;
+    public void updateData(ProviderDataUpdate providerDataUpdate) {
+        if (providerDataUpdate.firstName() != null) {
+            this.firstName = providerDataUpdate.firstName();
+        }
+        if (providerDataUpdate.lastName() != null) {
+            this.lastName = providerDataUpdate.lastName();
+        }
+        if (providerDataUpdate.email() != null && !providerDataUpdate.email().equals(this.email)) {
+            this.email = providerDataUpdate.email();
+        }
+        if (providerDataUpdate.phoneNumber() != null) {
+            this.phoneNumber = providerDataUpdate.phoneNumber();
+        }
     }
 
-    @Override
-    public String getUsername() {
-        return null;
+    public void deactivateProvider() {
+        this.isActive = false;
     }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
-
 }

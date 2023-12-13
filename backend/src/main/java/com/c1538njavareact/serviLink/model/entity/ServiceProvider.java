@@ -24,12 +24,18 @@ public class ServiceProvider {
     private String description;
     private BigDecimal price;
     @ManyToOne
-    @JoinColumn(name = "providers_id", nullable = false)
-    private  Provider providers;
+    @JoinColumn(name = "provider_id", nullable = false)
+    private  Provider provider;
     @ManyToOne
-    @JoinColumn(name = "services_id", nullable = false)
-    private Service services;
+    @JoinColumn(name = "service_id", nullable = false)
+    private Service service;
     @OneToMany(mappedBy = "servicesProvider", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<ServiceProviderExperience> serviceProviderExperienceList;
 
+    public ServiceProvider(Provider provider, Service service, String description, BigDecimal price){
+        this.provider = provider;
+        this.service = service;
+        this.description = description;
+        this.price = price;
+    }
 }
