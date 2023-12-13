@@ -12,6 +12,7 @@ const ServiceData =
       name: "Juan Jurado",
       contact: "+57312312312",
       image: "./images/download 3.jpg",
+      email: "provedor@example.com"
     };
 
 export default function Service() {
@@ -32,6 +33,7 @@ export default function Service() {
         <ProviderDataCard
           name={ProviderData.name}
           contact={ProviderData.contact}
+          email={ProviderData.email}
           image={ProviderData.image}
         />
       </div>
