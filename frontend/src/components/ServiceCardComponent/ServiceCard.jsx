@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-const ServiceCard = ({ title, image, additionalContent }) => (
+const ServiceCard = ({ id, title, image, additionalContent }) => (
   <div className="w-full">
     <img
       className="object-cover w-full rounded-lg h-60"
@@ -15,6 +16,11 @@ const ServiceCard = ({ title, image, additionalContent }) => (
     </div>
 
     {additionalContent && <div>{additionalContent}</div>}
+
+    <Link className="" to="/service">
+      <button className="bg-black border rounded w-[80px] h-[30px] text-xs text-white">Ver más</button>
+    </Link>
+
   </div>
 );
 

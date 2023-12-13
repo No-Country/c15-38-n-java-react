@@ -6,6 +6,7 @@ import GardeningServices from "./pages/GardeningServices";
 import HomeOrganization from "./pages/HomeOrganization";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
+import Service from "./pages/Service";
 
 function App() {
   return (
@@ -33,6 +34,10 @@ function App() {
             <Route
               path="/signUp"
               element={<SignUp />}
+            />
+            <Route
+              path="/service"
+              element={<Service />}
             />
           </Routes>
         </div>
