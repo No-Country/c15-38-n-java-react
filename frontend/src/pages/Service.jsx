@@ -1,12 +1,12 @@
 import ServiceDataCard from "../components/ServiceDataCard";
 import ProviderDataCard from "../components/ProviderDataCard";
 
-const ServiceData = 
-    {
-      title: "Dropdown de servicios: Mantenimiento del jardín",
+const ServiceData = {
+      title: "Dropdown de servicios: 1 Mantenimiento del jardín",
       description: "Corte en figuras",
+      precio: "20 dolares",
       image: "./images/download 4.jpg",
-    };
+    }
 
   const ProviderData = {
       name: "Juan Jurado",
@@ -15,19 +15,13 @@ const ServiceData =
       email: "provedor@example.com"
     };
 
+    
+
 export default function Service() {
+
   return (
-    <div className="flex flex-wrap justify-around">
-      
-      <div className="border rounded m-[10px]">
-        <h1>ServiceData</h1>
-        <ServiceDataCard
-          title={ServiceData.title}
-          description={ServiceData.description}
-          image={ServiceData.image}
-        />
-      </div>
-      
+    <div className="flex flex-col items-center">
+
       <div className="border rounded m-[10px]">
         <h2>ProviderData</h2>
         <ProviderDataCard
@@ -37,6 +31,17 @@ export default function Service() {
           image={ProviderData.image}
         />
       </div>
+
+      <div className="w-full border rounded m-[10px]">
+        <h1>ServiceData</h1>
+        <ServiceDataCard
+          title={ServiceData.title}
+          description={ServiceData.description}
+          precio={ServiceData.precio}
+          image={ServiceData.image}
+        />
+      </div>
+
     </div>
   );
 }

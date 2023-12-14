@@ -17,7 +17,7 @@ const ServiceCard = ({ id, title, image, additionalContent }) => (
 
     {additionalContent && <div>{additionalContent}</div>}
 
-    <Link className="" to="/service">
+    <Link className="" to={`/service`}>
       <button className="bg-black border rounded w-[80px] h-[30px] text-xs text-white">Ver más</button>
     </Link>
 
