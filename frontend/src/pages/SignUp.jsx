@@ -24,7 +24,7 @@ export default function SignUp() {
                   </Link>
                 </span>
               </div>
-              <div className="h-[51px]">
+              <div className="h-[51px] mt-4">
                 <input
                   type="text"
                   name="email"
@@ -45,7 +45,7 @@ export default function SignUp() {
                   Show
                 </span>
               </div>
-              <div className="h-[51px]">
+              <div className="h-[51px] mt-4">
                 <input
                   type="text"
                   name="email"
@@ -53,7 +53,7 @@ export default function SignUp() {
                 ></input>
               </div>
             </div>
-            <div>
+            <div className="mt-8">
               <button className="bg-black border rounded w-full h-[50px] text-lg text-white">
                 Sign up
               </button>
