@@ -7,6 +7,8 @@ import HomeOrganization from "./pages/HomeOrganization";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import ProviderDashboard from "./pages/ProviderDashboard";
+import AddService from "./pages/AddService";
+import UpdateProviderData from "./pages/UpdateProviderData";
 
 function App() {
   return (
@@ -38,6 +40,15 @@ function App() {
             <Route
               path="/providerDashboard"
               element={<ProviderDashboard />}
+            />
+
+            <Route
+              path="/addService"
+              element={<AddService />}
+            />
+            <Route
+              path="/updateProviderData"
+              element={<UpdateProviderData />}
             />
           </Routes>
         </div>

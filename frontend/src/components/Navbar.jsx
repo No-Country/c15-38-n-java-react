@@ -5,19 +5,23 @@ export default function Navbar() {
   const isLoginPage = location.pathname === "/logIn";
   const isSignUpPage = location.pathname === "/signUp";
   const isProviderDashboardPage = location.pathname === "/providerDashboard";
+  const isAddServicePage = location.pathname === "/addService";
+  const isUpdateProviderDataPage = location.pathname === "/updateProviderData";
 
-  // Define navigation options for different pages
-  const navigationOptions = isProviderDashboardPage
-    ? [
-        { to: "/providerDashboard", label: "Inicio" },
-        { to: "/addService", label: "Agregar servicio" },
-        { to: "/updateData", label: "Actualizar datos" },
-      ]
-    : [
-        { to: "/", label: "Limpieza del hogar" },
-        { to: "/gardeningServices", label: "Mantenimiento del jardín" },
-        { to: "/homeOrganization", label: "Organización del hogar" },
-      ];
+  const navigationOptions =
+    isProviderDashboardPage || isAddServicePage || isUpdateProviderDataPage
+      ? [
+          { to: "/providerDashboard", label: "Inicio" },
+          { to: "/addService", label: "Agregar servicio" },
+          { to: "/updateProviderData", label: "Actualizar datos" },
+        ]
+      : !isLoginPage && !isSignUpPage
+      ? [
+          { to: "/", label: "Limpieza del hogar" },
+          { to: "/gardeningServices", label: "Mantenimiento del jardín" },
+          { to: "/homeOrganization", label: "Organización del hogar" },
+        ]
+      : [];
 
   return (
     <nav className="fixed top-0 left-0 z-10 w-full px-4 md:px-10 pt-4 overflow-hidden lg:px-0 bg-white lg:w-[59rem] lg:left-1/2 xl:w-[80rem] 2xl:w-[90rem] lg:-translate-x-1/2 lg:transform">
@@ -34,28 +38,29 @@ export default function Navbar() {
             </span>
           </div>
         </Link>
-        {/* ... */}
 
         <div className="flex items-center gap-4">
-          {/* Conditionally render login and signup buttons */}
-          {!isLoginPage && !isSignUpPage && !isProviderDashboardPage && (
-            <>
-              <Link to="/logIn">
-                <button className="text-white text-xs lg:text-base bg-black rounded-lg w-[60px] h-[30px] lg:w-[98px] lg:h-[40px]">
-                  Log in
-                </button>
-              </Link>
-              <Link to="/signUp">
-                <button className="rounded-lg w-[60px] h-[30px] lg:w-[98px] lg:h-[40px] border-2 border-black text-xs lg:text-base">
-                  Sign Up
-                </button>
-              </Link>
-            </>
-          )}
+          {!isLoginPage &&
+            !isSignUpPage &&
+            !isProviderDashboardPage &&
+            !isAddServicePage &&
+            !isUpdateProviderDataPage && (
+              <>
+                <Link to="/logIn">
+                  <button className="text-white text-xs lg:text-base bg-black rounded-lg w-[60px] h-[30px] lg:w-[98px] lg:h-[40px]">
+                    Log in
+                  </button>
+                </Link>
+                <Link to="/signUp">
+                  <button className="rounded-lg w-[60px] h-[30px] lg:w-[98px] lg:h-[40px] border-2 border-black text-xs lg:text-base">
+                    Sign Up
+                  </button>
+                </Link>
+              </>
+            )}
         </div>
       </div>
 
-      {/* Render navigation options */}
       {!isLoginPage && !isSignUpPage && (
         <div className="mt-6 overflow-x-auto hide-scrollbar">
           <ul className="flex space-x-4">
