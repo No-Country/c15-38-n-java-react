@@ -7,13 +7,15 @@ import HomeOrganization from "./pages/HomeOrganization";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import ProviderDashboard from "./pages/ProviderDashboard";
+import AddService from "./pages/AddService";
+import UpdateProviderData from "./pages/UpdateProviderData";
 
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <Router>
         <Navbar />
-        <div className="mt-[150px] px-4 md:px-10 xl:px-0 xl:max-w-[80rem] 2xl:max-w-[90rem] xl:mx-auto">
+        <div>
           <Routes>
             <Route
               path="/"
@@ -38,6 +40,15 @@ function App() {
             <Route
               path="/providerDashboard"
               element={<ProviderDashboard />}
+            />
+
+            <Route
+              path="/addService"
+              element={<AddService />}
+            />
+            <Route
+              path="/updateProviderData"
+              element={<UpdateProviderData />}
             />
           </Routes>
         </div>
