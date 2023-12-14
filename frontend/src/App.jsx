@@ -13,7 +13,7 @@ function App() {
     <div className="flex flex-col min-h-screen">
       <Router>
         <Navbar />
-        <div className="mt-[150px] px-4 md:px-10 xl:px-0 xl:max-w-[80rem] 2xl:max-w-[90rem] xl:mx-auto">
+        <div>
           <Routes>
             <Route
               path="/"

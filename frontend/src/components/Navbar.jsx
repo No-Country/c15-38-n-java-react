@@ -9,7 +9,7 @@ export default function Navbar() {
   // Define navigation options for different pages
   const navigationOptions = isProviderDashboardPage
     ? [
-        { to: "/", label: "Inicio" },
+        { to: "/providerDashboard", label: "Inicio" },
         { to: "/addService", label: "Agregar servicio" },
         { to: "/updateData", label: "Actualizar datos" },
       ]
@@ -26,7 +26,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <img
               className="w-6 xl:w-8"
-              src="public/images/logo.svg"
+              src="/images/logo.svg"
               alt="Logo"
             />
             <span className="hidden text-xl font-medium md:block ">
