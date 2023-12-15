@@ -19,7 +19,7 @@ export default function SignUp() {
     try {
       const response = await registrarUsuario(formData);
 
-      // Manejar la respuesta aquí, por ejemplo, redirigir al usuario a la página de inicio de sesión
+      // Manejar la respuesta aquí
       console.log("Registro exitoso:", response);
     } catch (error) {
       // Manejar errores aquí
@@ -92,7 +92,7 @@ export default function SignUp() {
               <div className="h-[51px] mt-4">
                 <input
                   onChange={handleChange}
-                  type="text"
+                  type="password"
                   name="password"
                   className="w-full h-full border rounded p-[14px]"
                 />
