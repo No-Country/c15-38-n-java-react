@@ -54,7 +54,7 @@ export default function SignUp() {
                 <input
                   onChange={handleChange}
                   type="text"
-                  name="name"
+                  name="firstName"
                   className="w-full h-full border rounded p-[14px]"
                 />
               </div>
