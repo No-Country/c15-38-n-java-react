@@ -21,7 +21,6 @@ public class ServiceController implements IServiceController {
 
     @Override
     public ResponseEntity<List<ServiceDataResponse>> getListAllServices() {
-        List<ServiceDataResponse> listAllServices = service.getAllServices();
-        return ResponseEntity.ok(listAllServices);
+        return service.getAllServices();
     }
 }

@@ -79,7 +79,7 @@ public class ServiceProviderService implements IServiceProviderService {
                         serviceProvider.getProvider().getPhoneNumber(), serviceProvider.getProvider().getProfileImageUrl()
                 ),
                 new com.c1538njavareact.serviLink.model.entity.Service(serviceProvider.getService().getId(),
-                        serviceProvider.getService().getName(), serviceProvider.getService().getServiceCategory()
+                        serviceProvider.getService().getName()
                 ),
                 serviceProvider.getDescription(), serviceProvider.getPrice()
         );
