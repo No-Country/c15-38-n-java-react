@@ -6,7 +6,6 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.c1538njavareact.serviLink.exception.IntegrityValidation;
-import com.c1538njavareact.serviLink.model.entity.Provider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

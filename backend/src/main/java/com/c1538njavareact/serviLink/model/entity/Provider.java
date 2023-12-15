@@ -29,6 +29,8 @@ public class Provider {
     private String phoneNumber;
     @Column(name = "profile_image_url")
     private String profileImageUrl;
+    @Column(name = "cloudinary_public_id")
+    private String cloudinaryPublicId;
     @Column(nullable = false)
     private boolean isActive = true;
 
@@ -52,9 +54,6 @@ public class Provider {
         }
         if (providerDataUpdate.lastName() != null) {
             this.lastName = providerDataUpdate.lastName();
-        }
-        if (providerDataUpdate.email() != null && !providerDataUpdate.email().equals(this.email)) {
-            this.email = providerDataUpdate.email();
         }
         if (providerDataUpdate.phoneNumber() != null) {
             this.phoneNumber = providerDataUpdate.phoneNumber();

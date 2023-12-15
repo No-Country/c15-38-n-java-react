@@ -1,5 +1,7 @@
 package com.c1538njavareact.serviLink.model.entity;
 
+import com.c1538njavareact.serviLink.model.dto.ProviderDataUpdate;
+import com.c1538njavareact.serviLink.model.dto.ServiceProviderDataUpdate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,5 +39,14 @@ public class ServiceProvider {
         this.service = service;
         this.description = description;
         this.price = price;
+    }
+
+    public void updateData(ServiceProviderDataUpdate serviceProviderDataUpdate) {
+        if (serviceProviderDataUpdate.description() != null) {
+            this.description = serviceProviderDataUpdate.description();
+        }
+        if (serviceProviderDataUpdate.price() != null) {
+            this.price = serviceProviderDataUpdate.price();
+        }
     }
 }
