@@ -9,6 +9,8 @@ import SignUp from "./pages/SignUp";
 import ProviderDashboard from "./pages/ProviderDashboard";
 import AddService from "./pages/AddService";
 import UpdateProviderData from "./pages/UpdateProviderData";
+import Service from "./pages/Service";
+
 
 function App() {
   return (
@@ -38,6 +40,10 @@ function App() {
               element={<SignUp />}
             />
             <Route
+
+              path="/service"
+              element={<Service />}
+
               path="/providerDashboard"
               element={<ProviderDashboard />}
             />
@@ -49,6 +55,7 @@ function App() {
             <Route
               path="/updateProviderData"
               element={<UpdateProviderData />}
+
             />
           </Routes>
         </div>
