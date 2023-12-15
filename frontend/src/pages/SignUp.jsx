@@ -1,6 +1,32 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { registrarUsuario } from "/api/api.js";
 
 export default function SignUp() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await registrarUsuario(formData);
+
+      // Manejar la respuesta aquí, por ejemplo, redirigir al usuario a la página de inicio de sesión
+      console.log("Registro exitoso:", response);
+    } catch (error) {
+      // Manejar errores aquí
+      console.error("Error al registrar:", error);
+    }
+  };
+
   return (
     <section className="flex items-center justify-center mt-[150px]">
       <div className="border rounded-2xl w-[480px] p-[48px]">
@@ -8,17 +34,17 @@ export default function SignUp() {
           <h1 className="text-3xl font-bold">Sign up</h1>
         </div>
         <div>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <div className="h-[54px] flex items-end justify-between">
                 <label
                   htmlFor="name"
                   className="text-base font-semibold"
                 >
-                  Name
+                  Nombre
                 </label>
                 <span className="text-sm font-normal">
-                  Already have an account?
+                  Ya tienes una cuenta?
                   <Link to="/logIn">
                     <span className="ml-[6px] font-semibold">Log in</span>
                   </Link>
@@ -26,6 +52,7 @@ export default function SignUp() {
               </div>
               <div className="h-[51px] mt-4">
                 <input
+                  onChange={handleChange}
                   type="text"
                   name="name"
                   className="w-full h-full border rounded p-[14px]"
@@ -44,6 +71,7 @@ export default function SignUp() {
               </div>
               <div className="h-[51px] mt-4">
                 <input
+                  onChange={handleChange}
                   type="text"
                   name="email"
                   className="w-full h-full border rounded p-[14px]"
@@ -57,12 +85,13 @@ export default function SignUp() {
                   htmlFor="current-password"
                   className="text-base font-semibold"
                 >
-                  Password
+                  Contranseña
                 </label>
                 <span className="text-sm font-semibold">Show</span>
               </div>
               <div className="h-[51px] mt-4">
                 <input
+                  onChange={handleChange}
                   type="text"
                   name="password"
                   className="w-full h-full border rounded p-[14px]"
@@ -83,7 +112,7 @@ export default function SignUp() {
 
           <div>
             <button className="bg-white border rounded w-full h-[50px] text-base text-black">
-              Continue with Google
+              Continuar con Google
             </button>
           </div>
         </div>
