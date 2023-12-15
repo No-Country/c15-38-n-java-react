@@ -22,14 +22,14 @@ import java.net.URI;
 @Service
 public class UserService implements UserDetailsService, IUserService {
     @Autowired
-    private IUserRepository IUserRepository;
+    private IUserRepository iUserRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetails user = IUserRepository.findByUsername(username);
+        UserDetails user = iUserRepository.findByUsername(username);
         if(user.isEnabled()){
-            return IUserRepository.findByUsername(username);
+            return iUserRepository.findByUsername(username);
         } else {
             throw new AuthValidation(
                     "This user is not active");
@@ -39,18 +39,18 @@ public class UserService implements UserDetailsService, IUserService {
 
     @Override
     public ResponseEntity<UserDataLogin> createUser(UserDataSignUp userDataSignUp, UriComponentsBuilder uriComponentsBuilder) {
-        if (IUserRepository.existsByUsername(userDataSignUp.email())) {
+        if (iUserRepository.existsByUsername(userDataSignUp.email())) {
             throw new IntegrityValidation(
                     "This email already exists");
         }
 
-        User user =  IUserRepository.saveAndFlush(new User(userDataSignUp, passwordEncoder.encode(userDataSignUp.password())));
+        User user =  iUserRepository.saveAndFlush(new User(userDataSignUp, passwordEncoder.encode(userDataSignUp.password())));
         UserDataLogin providerDataLogin = new UserDataLogin(user.getId(), user.getUsername(), user.getPassword());
 
         Provider provider = new Provider(userDataSignUp.firstName(), userDataSignUp.email(), user);
         user.setProvider(provider);
 
-        IUserRepository.saveAndFlush(user);
+        iUserRepository.saveAndFlush(user);
 
         URI url = uriComponentsBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(url).body(providerDataLogin);

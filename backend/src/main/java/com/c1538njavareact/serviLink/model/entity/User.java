@@ -72,4 +72,8 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return provider.isActive();
     }
+
+    public void updateData(String email) {
+        this.username = email;
+    }
 }
