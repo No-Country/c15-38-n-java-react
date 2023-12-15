@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function LogIn() {
   return (
-    <div className="flex justify-center">
+    <div className="flex items-center justify-center mt-[150px]">
       <section className="border rounded-2xl w-[480px] p-[48px]">
         <div>
           <h1 className="text-3xl font-bold">Log in</h1>
@@ -10,7 +10,7 @@ export default function LogIn() {
         <div>
           <from>
             <div>
-              <div className="h-[54px] flex items-end justify-between">
+              <div className="h-[54px] flex items-end justify-between mb-4">
                 <label
                   htmlFor="email"
                   className="text-base font-semibold"
@@ -33,7 +33,7 @@ export default function LogIn() {
               </div>
             </div>
             <div>
-              <div className="h-[54px] flex items-end justify-between">
+              <div className="h-[54px] flex items-end justify-between mb-4">
                 <label
                   htmlFor="current-password"
                   className="text-base font-semibold"
