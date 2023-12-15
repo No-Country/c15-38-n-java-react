@@ -11,7 +11,6 @@ import AddService from "./pages/AddService";
 import UpdateProviderData from "./pages/UpdateProviderData";
 import Service from "./pages/Service";
 
-
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -40,10 +39,10 @@ function App() {
               element={<SignUp />}
             />
             <Route
-
               path="/service"
               element={<Service />}
-
+            />
+            <Route
               path="/providerDashboard"
               element={<ProviderDashboard />}
             />
@@ -55,7 +54,6 @@ function App() {
             <Route
               path="/updateProviderData"
               element={<UpdateProviderData />}
-
             />
           </Routes>
         </div>
