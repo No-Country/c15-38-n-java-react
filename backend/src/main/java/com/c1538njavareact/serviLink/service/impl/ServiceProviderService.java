@@ -1,10 +1,7 @@
 package com.c1538njavareact.serviLink.service.impl;
 
 import com.c1538njavareact.serviLink.exception.IntegrityValidation;
-import com.c1538njavareact.serviLink.model.dto.ProviderDataGetOne;
-import com.c1538njavareact.serviLink.model.dto.ServiceProviderData;
-import com.c1538njavareact.serviLink.model.dto.ServiceProviderDataCreate;
-import com.c1538njavareact.serviLink.model.dto.ServiceProviderDataList;
+import com.c1538njavareact.serviLink.model.dto.*;
 import com.c1538njavareact.serviLink.model.entity.Provider;
 import com.c1538njavareact.serviLink.model.entity.ServiceProvider;
 import com.c1538njavareact.serviLink.repository.IProviderRepository;
@@ -24,52 +21,74 @@ import java.net.URI;
 public class ServiceProviderService implements IServiceProviderService {
 
     @Autowired
-    private IProviderRepository IProviderRepository;
+    private IProviderRepository iProviderRepository;
     @Autowired
-    private IServiceRepository IServiceRepository;
+    private IServiceRepository iServiceRepository;
     @Autowired
-    private IServiceProviderRepository IServiceProviderRepository;
+    private IServiceProviderRepository iServiceProviderRepository;
 
 
     @Override
     public ResponseEntity<ServiceProviderData> getById(Long id) {
-        ServiceProvider serviceProvider = IServiceProviderRepository.findById(id).get();
+        ServiceProvider serviceProvider = iServiceProviderRepository.findById(id).get();
         return ResponseEntity.ok(generateServiceProviderData(serviceProvider));
     }
 
     @Override
     public ResponseEntity<Page<ServiceProviderDataList>> getByIdProvider(Long id, Pageable pagination) {
-        Page<ServiceProvider> serviceProvider = IServiceProviderRepository.findByProviderId(id, pagination);
+        Page<ServiceProvider> serviceProvider = iServiceProviderRepository.findByProviderId(id, pagination);
         return ResponseEntity.ok(serviceProvider.map(ServiceProviderDataList::new));
     }
 
     @Override
     public ResponseEntity<Page<ServiceProviderDataList>> getByIdService(Long id, Pageable pagination) {
-        Page<ServiceProvider> serviceProvider = IServiceProviderRepository.findByServiceId(id, pagination);
+        Page<ServiceProvider> serviceProvider = iServiceProviderRepository.findByServiceId(id, pagination);
         return ResponseEntity.ok(serviceProvider.map(ServiceProviderDataList::new));
     }
 
     @Override
     public ResponseEntity<ServiceProviderData> createServiceProvider(ServiceProviderDataCreate serviceProviderDataCreate, UriComponentsBuilder uriComponentsBuilder) {
-        if(IProviderRepository.findById(serviceProviderDataCreate.idProvider()).isEmpty()){
+        if(iProviderRepository.findById(serviceProviderDataCreate.idProvider()).isEmpty()){
             throw new IntegrityValidation("This provider ID does not was found");
         }
 
-        if(IServiceRepository.findById(serviceProviderDataCreate.idService()).isEmpty()){
+        if(iServiceRepository.findById(serviceProviderDataCreate.idService()).isEmpty()){
             throw new IntegrityValidation("This service ID does not was found");
         }
 
-        Provider provider = IProviderRepository.findById(serviceProviderDataCreate.idProvider()).get();
-        com.c1538njavareact.serviLink.model.entity.Service service = IServiceRepository.findById(serviceProviderDataCreate.idService()).get();
+        Provider provider = iProviderRepository.findById(serviceProviderDataCreate.idProvider()).get();
+        com.c1538njavareact.serviLink.model.entity.Service service = iServiceRepository.findById(serviceProviderDataCreate.idService()).get();
 
         ServiceProvider serviceProvider = new ServiceProvider(provider,service,serviceProviderDataCreate.description(),
                 serviceProviderDataCreate.price());
 
-        IServiceProviderRepository.save(serviceProvider);
+        iServiceProviderRepository.save(serviceProvider);
 
         URI url = uriComponentsBuilder.path("/serviceprovider/{id}").buildAndExpand(serviceProvider.getId()).toUri();
 
         return ResponseEntity.created(url).body(generateServiceProviderData(serviceProvider));
+    }
+
+    @Override
+    public ResponseEntity<ServiceProviderData> updateServiceProvider(Long id, ServiceProviderDataUpdate serviceProviderDataUpdate) {
+        existsServiceProviderById(id);
+        ServiceProvider serviceProvider = iServiceProviderRepository.getReferenceById(id);
+        serviceProvider.updateData(serviceProviderDataUpdate);
+        return ResponseEntity.ok(generateServiceProviderData(serviceProvider));
+    }
+
+    @Override
+    public ResponseEntity deleteServiceProvider(Long id) {
+        existsServiceProviderById(id);
+        iServiceProviderRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    private void existsServiceProviderById(Long id){
+        if (iServiceProviderRepository.existsById(id)){
+        } else {
+            throw new IntegrityValidation("Does not exists any Service provider with ID " + id);
+        }
     }
 
     private ServiceProviderData generateServiceProviderData(ServiceProvider serviceProvider){
