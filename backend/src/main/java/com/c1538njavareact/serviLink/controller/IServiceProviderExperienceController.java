@@ -29,7 +29,7 @@ public interface IServiceProviderExperienceController {
 
     @PostMapping()
     ResponseEntity<ServiceProviderExperienceDataResponse> createdServiceProviderExperience
-            (@RequestBody @Valid ServiceProviderExperienceDataCreate serviceProviderExperienceData, UriComponentsBuilder uriComponentsBuilder,
+            (@Valid ServiceProviderExperienceDataCreate serviceProviderExperienceData, UriComponentsBuilder uriComponentsBuilder,
              @RequestParam("imageFile")MultipartFile imageFile) throws IOException;
 
 }
