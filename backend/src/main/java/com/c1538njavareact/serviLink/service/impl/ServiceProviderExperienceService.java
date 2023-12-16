@@ -49,12 +49,12 @@ public class ServiceProviderExperienceService implements IServiceProviderExperie
 
     @Override
     public ResponseEntity<ServiceProviderExperienceDataResponse> createdServiceProviderExperience
-            (ServiceProviderExperienceDataCreate serviceProviderExperience, UriComponentsBuilder uriComponentsBuilder,
+            (ServiceProviderExperienceDataCreate dataCreate, UriComponentsBuilder uriComponentsBuilder,
              MultipartFile imageFile) throws IOException {
-        if (serviceProviderRepository.findById(serviceProviderExperience.idServiceProvider()).isEmpty()) {
+        if (serviceProviderRepository.findById(dataCreate.idServiceProvider()).isEmpty()) {
             throw new IntegrityValidation("This provider ID does not was found");
         }
-        ServiceProvider serviceProvider = serviceProviderRepository.findById(serviceProviderExperience.idServiceProvider()).get();
+        ServiceProvider serviceProvider = serviceProviderRepository.findById(dataCreate.idServiceProvider()).get();
         Map imageCreated = null;
         if (imageFile != null) {
             if (FileImageFormatUtil.isFileImageFormat(imageFile)) {
@@ -65,12 +65,34 @@ public class ServiceProviderExperienceService implements IServiceProviderExperie
         }
         ServiceProviderExperience saveServiceProviderExperience = new ServiceProviderExperience(
                 imageCreated.get("secure_url").toString(), imageCreated.get("public_id").toString(),
-                serviceProviderExperience.altText(), serviceProviderExperience.experienceDescription(), serviceProvider);
+                dataCreate.altText(), dataCreate.experienceDescription(), serviceProvider);
         serviceProviderExperienceRepository.save(saveServiceProviderExperience);
         URI url = uriComponentsBuilder.path("/service-provider-experience/{id}")
                 .buildAndExpand(saveServiceProviderExperience.getId()).toUri();
         return ResponseEntity.created(url).body(generateServiceProviderExperienceDataResponse(saveServiceProviderExperience));
     }
+
+    @Override
+    public ResponseEntity<ServiceProviderExperienceDataResponse> updateServiceProviderExperience
+            (Long id, ServiceProviderExperienceDataUpdate dataUpdate, MultipartFile imageFile) throws IOException {
+        existsServiceProviderExperienceById(id);
+        ServiceProviderExperience serviceProviderExperience = serviceProviderExperienceRepository.getReferenceById(id);
+        if(imageFile != null) {
+            if (FileImageFormatUtil.isFileImageFormat(imageFile)){
+                if(serviceProviderExperience.getImageUrl() != null){
+                    cloudinary.uploader().destroy(serviceProviderExperience.getCloudinaryPublicId(), Map.of());
+                }
+                Map imageUploaded = new HashMap(uploadImage(imageFile));
+                serviceProviderExperience.setImageUrl(imageUploaded.get("secure_url").toString());
+                serviceProviderExperience.setCloudinaryPublicId(imageUploaded.get("public_id").toString());
+            } else {
+                throw new IntegrityValidation("Only accept image files!");
+            }
+        }
+        serviceProviderExperience.updateData(dataUpdate);
+        return ResponseEntity.ok(generateServiceProviderExperienceDataResponse(serviceProviderExperience));
+    }
+
 
     private ServiceProviderExperienceDataResponse generateServiceProviderExperienceDataResponse
             (ServiceProviderExperience serviceProviderExperience){
@@ -89,6 +111,13 @@ public class ServiceProviderExperienceService implements IServiceProviderExperie
                         ),
                         serviceProviderExperience.getServicesProvider().getDescription(), serviceProviderExperience.getServicesProvider().getPrice())
                 );
+    }
+
+    private void existsServiceProviderExperienceById(Long id){
+        if (serviceProviderExperienceRepository.existsById(id)){
+        } else {
+            throw new IntegrityValidation("Does not exists any Service provider with ID " + id);
+        }
     }
 
     private Map uploadImage(MultipartFile imageFile) {

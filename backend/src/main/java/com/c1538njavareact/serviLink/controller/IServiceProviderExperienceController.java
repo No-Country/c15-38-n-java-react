@@ -4,6 +4,7 @@ package com.c1538njavareact.serviLink.controller;
 import com.c1538njavareact.serviLink.model.dto.ServiceProviderExperienceDataCreate;
 import com.c1538njavareact.serviLink.model.dto.ServiceProviderExperienceDataList;
 import com.c1538njavareact.serviLink.model.dto.ServiceProviderExperienceDataResponse;
+import com.c1538njavareact.serviLink.model.dto.ServiceProviderExperienceDataUpdate;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +30,11 @@ public interface IServiceProviderExperienceController {
 
     @PostMapping()
     ResponseEntity<ServiceProviderExperienceDataResponse> createdServiceProviderExperience
-            (@RequestBody @Valid ServiceProviderExperienceDataCreate serviceProviderExperienceData, UriComponentsBuilder uriComponentsBuilder,
+            (@Valid ServiceProviderExperienceDataCreate serviceProviderExperienceData, UriComponentsBuilder uriComponentsBuilder,
              @RequestParam("imageFile")MultipartFile imageFile) throws IOException;
 
+    @PutMapping(path = "/{id}")
+    ResponseEntity<ServiceProviderExperienceDataResponse> updateServiceProviderExperience
+            (@PathVariable Long id, @Valid ServiceProviderExperienceDataUpdate dataUpdate,
+             @RequestParam("imageFile")MultipartFile imageFile) throws IOException;
 }
