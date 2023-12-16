@@ -2,6 +2,7 @@ package com.c1538njavareact.serviLink.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.web.multipart.MultipartFile;
 
 public record ServiceProviderExperienceDataCreate(
         @NotNull
@@ -9,7 +10,6 @@ public record ServiceProviderExperienceDataCreate(
         String altText,
         @NotBlank
         String experienceDescription,
-        @NotBlank
-        String imageUrl
+        MultipartFile imageFile
 ) {
 }

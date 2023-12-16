@@ -12,7 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.io.IOException;
+
 import static com.c1538njavareact.serviLink.config.ApiConstants.SERVICE_PROVIDER_EXPERIENCE_URI;
 
 @RestController
@@ -34,9 +38,8 @@ public class ServiceProviderExperienceController implements IServiceProviderExpe
     }
 
     @Override
-    public ResponseEntity<ServiceProviderExperienceDataResponse> createdServiceProviderExperience
-            (ServiceProviderExperienceDataCreate serviceProviderExperienceDataCreate, UriComponentsBuilder uriComponentsBuilder) {
-        return serviceProviderExperience
-                .createdServiceProviderExperience(serviceProviderExperienceDataCreate, uriComponentsBuilder);
+    public ResponseEntity<ServiceProviderExperienceDataResponse> createdServiceProviderExperience(ServiceProviderExperienceDataCreate serviceProviderExperienceData, UriComponentsBuilder uriComponentsBuilder, MultipartFile imageFile) throws IOException {
+        return serviceProviderExperience.createdServiceProviderExperience(serviceProviderExperienceData, uriComponentsBuilder, imageFile);
     }
+
 }

@@ -7,4 +7,5 @@ public interface ApiConstants {
     String SERVICE_URI = "/api/service";
     String SERVICE_PROVIDER_EXPERIENCE_URI = "/api/service-provider-experience/";
 
+
 }

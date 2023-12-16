@@ -4,7 +4,9 @@ import com.c1538njavareact.serviLink.controller.IServiceProviderController;
 import com.c1538njavareact.serviLink.model.dto.ServiceProviderData;
 import com.c1538njavareact.serviLink.model.dto.ServiceProviderDataCreate;
 import com.c1538njavareact.serviLink.model.dto.ServiceProviderDataList;
+import com.c1538njavareact.serviLink.model.dto.ServiceProviderDataUpdate;
 import com.c1538njavareact.serviLink.service.IServiceProviderService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,5 +41,16 @@ public class ServiceProviderController implements IServiceProviderController {
     @Override
     public ResponseEntity<ServiceProviderData> createServiceProvider(ServiceProviderDataCreate serviceProviderDataCreate, UriComponentsBuilder uriComponentsBuilder) {
         return serviceProviderService.createServiceProvider(serviceProviderDataCreate, uriComponentsBuilder);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<ServiceProviderData> updateServiceProvider(Long id, ServiceProviderDataUpdate serviceProviderDataUpdate) {
+        return serviceProviderService.updateServiceProvider(id, serviceProviderDataUpdate);
+    }
+
+    @Override
+    public ResponseEntity deleteServiceProvider(Long id) {
+        return serviceProviderService.deleteServiceProvider(id);
     }
 }

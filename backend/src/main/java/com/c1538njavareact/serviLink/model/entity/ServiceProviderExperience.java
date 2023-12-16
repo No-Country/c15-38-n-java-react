@@ -18,6 +18,8 @@ public class ServiceProviderExperience {
     private Long id;
     @Column(name = "image_url")
     private String imageUrl;
+    @Column(name = "cloudinary_public_id")
+    private String cloudinaryPublicId;
     @Column(name = "alt_text")
     private String altText;
     @Column(name = "experience_description")
@@ -26,12 +28,14 @@ public class ServiceProviderExperience {
     @JoinColumn(name = "services_provider_id", nullable = false)
     private ServiceProvider servicesProvider;
 
-
     public ServiceProviderExperience
-            (String imageUrl, String altText, String experienceDescription, ServiceProvider serviceProvider) {
-        this.imageUrl = imageUrl;
+            (String secureUrl, String publicId, String altText, String experienceDescription, ServiceProvider serviceProvider) {
+        this.imageUrl = secureUrl;
+        this.cloudinaryPublicId = publicId;
         this.altText = altText;
         this.experienceDescription = experienceDescription;
         this.servicesProvider = serviceProvider;
+
     }
+
 }
