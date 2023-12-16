@@ -2,6 +2,7 @@ package com.c1538njavareact.serviLink.model.dto;
 
 import com.c1538njavareact.serviLink.model.entity.Provider;
 import com.c1538njavareact.serviLink.model.entity.Service;
+import lombok.Builder;
 
 import java.math.BigDecimal;
 
