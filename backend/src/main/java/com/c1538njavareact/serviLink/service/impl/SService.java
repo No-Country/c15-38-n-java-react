@@ -4,6 +4,7 @@ import com.c1538njavareact.serviLink.model.dto.ServiceDataResponse;
 import com.c1538njavareact.serviLink.repository.IServiceRepository;
 import com.c1538njavareact.serviLink.service.ISService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,11 +18,11 @@ public class SService implements ISService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<ServiceDataResponse> getAllServices() {
-        return serviceRepository.findAll().stream()
+    public ResponseEntity<List<ServiceDataResponse>> getAllServices() {
+        return ResponseEntity.ok(serviceRepository.findAll().stream()
                 .map(service -> ServiceDataResponse.builder()
                         .service(service.getName())
                         .build())
-                .toList();
+                .toList());
     }
 }

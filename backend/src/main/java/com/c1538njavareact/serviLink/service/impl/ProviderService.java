@@ -6,13 +6,13 @@ import com.c1538njavareact.serviLink.model.dto.ProviderDataUpdate;
 import com.c1538njavareact.serviLink.model.entity.Provider;
 import com.c1538njavareact.serviLink.repository.IProviderRepository;
 import com.c1538njavareact.serviLink.service.IProviderService;
+import com.c1538njavareact.serviLink.utils.FileImageFormatUtil;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +39,7 @@ public class ProviderService implements IProviderService {
         Provider provider = iProviderRepository.getReferenceByUserId(id);
 
         if(imageFile != null) {
-            if (isFileImageFormat(imageFile)){
+            if (FileImageFormatUtil.isFileImageFormat(imageFile)){
                 if(provider.getProfileImageUrl() != null){
                     cloudinary.uploader().destroy(provider.getCloudinaryPublicId(), Map.of());
                 }
@@ -62,14 +62,6 @@ public class ProviderService implements IProviderService {
         Provider provider = iProviderRepository.getReferenceByUserId(id);
         provider.deactivateProvider();
         return ResponseEntity.noContent().build();
-    }
-
-    private boolean isFileImageFormat(MultipartFile imageFile){
-        if (!Objects.requireNonNull(imageFile.getContentType()).isEmpty() && imageFile.getContentType().contains("image")){
-            return true;
-        } else {
-            return false;
-        }
     }
 
     private Map uploadImage(MultipartFile imageFile) {
