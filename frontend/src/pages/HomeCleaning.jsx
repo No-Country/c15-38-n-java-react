@@ -3,19 +3,19 @@ import ServiceCard from "../components/ServiceCardComponent/ServiceCard";
 const HomeCleaningData = [
   {
     title: "Ejemplo 1",
-    image: "./images/1.jpg",
+    image: "/images/1.jpg",
   },
   {
     title: "Ejemplo 2",
-    image: "./images/2.jpg",
+    image: "/images/2.jpg",
   },
   {
     title: "Ejemplo 3",
-    image: "./images/3.jpg",
+    image: "/images/3.jpg",
   },
   {
     title: "Ejemplo 4",
-    image: "./images/4.jpg",
+    image: "/images/4.jpg",
   },
 ];
 
