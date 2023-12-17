@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/logo.svg";
 
 export default function Navbar() {
   const location = useLocation();
@@ -31,7 +30,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <img
               className="w-6 xl:w-8"
-              src={logo}
+              src="/public/images/logo.svg"
               alt="Logo"
             />
             <span className="hidden text-xl font-medium md:block ">
