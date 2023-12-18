@@ -16,7 +16,7 @@ export default function Footer() {
           >
             <img
               className="w-6 xl:w-8"
-              src="./public/images/Logo.svg"
+              src="./images/Logo.svg"
               alt="logo"
             />
             <span className="ml-2 text-xl font-medium">ServiLink</span>
