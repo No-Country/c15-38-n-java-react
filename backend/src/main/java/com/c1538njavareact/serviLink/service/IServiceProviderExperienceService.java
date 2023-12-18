@@ -25,4 +25,6 @@ public interface IServiceProviderExperienceService {
     ResponseEntity<ServiceProviderExperienceDataResponse> updateServiceProviderExperience
             (Long id, ServiceProviderExperienceDataUpdate dataUpdate, MultipartFile imageFile) throws IOException;
 
+    ResponseEntity deleteServiceProviderExperience(Long id) throws IOException;
+
 }

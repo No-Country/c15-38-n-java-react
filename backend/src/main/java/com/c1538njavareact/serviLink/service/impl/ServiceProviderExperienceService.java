@@ -7,7 +7,8 @@ import com.c1538njavareact.serviLink.model.entity.ServiceProviderExperience;
 import com.c1538njavareact.serviLink.repository.IServiceProviderExperienceRepository;
 import com.c1538njavareact.serviLink.repository.IServiceProviderRepository;
 import com.c1538njavareact.serviLink.service.IServiceProviderExperienceService;
-import com.c1538njavareact.serviLink.utils.FileImageFormatUtil;
+import com.c1538njavareact.serviLink.utils.IUploadImage;
+import com.c1538njavareact.serviLink.utils.MethodsUtil;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +16,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class ServiceProviderExperienceService implements IServiceProviderExperienceService {
+public class ServiceProviderExperienceService implements IServiceProviderExperienceService, IUploadImage {
 
     @Autowired
     private IServiceProviderExperienceRepository serviceProviderExperienceRepository;
@@ -35,18 +36,21 @@ public class ServiceProviderExperienceService implements IServiceProviderExperie
     @Autowired
     private Cloudinary cloudinary;
 
+    @Transactional(readOnly = true)
     @Override
     public ResponseEntity<ServiceProviderExperienceDataResponse> getById(Long id) {
         ServiceProviderExperience serviceProviderExperience = serviceProviderExperienceRepository.findById(id).get();
         return ResponseEntity.ok(generateServiceProviderExperienceDataResponse(serviceProviderExperience));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public ResponseEntity<Page<ServiceProviderExperienceDataList>> getByIdServiceProvider(Long id, Pageable pagination) {
         Page<ServiceProviderExperience> serviceProviderExperiences = serviceProviderExperienceRepository.findByServicesProviderId(id, pagination);
         return ResponseEntity.ok(serviceProviderExperiences.map(ServiceProviderExperienceDataList::new));
     }
 
+    @Transactional
     @Override
     public ResponseEntity<ServiceProviderExperienceDataResponse> createdServiceProviderExperience
             (ServiceProviderExperienceDataCreate dataCreate, UriComponentsBuilder uriComponentsBuilder,
@@ -57,8 +61,8 @@ public class ServiceProviderExperienceService implements IServiceProviderExperie
         ServiceProvider serviceProvider = serviceProviderRepository.findById(dataCreate.idServiceProvider()).get();
         Map imageCreated = null;
         if (imageFile != null) {
-            if (FileImageFormatUtil.isFileImageFormat(imageFile)) {
-                imageCreated = new HashMap(uploadImage(imageFile));
+            if (MethodsUtil.isFileImageFormat(imageFile)) {
+                imageCreated = new HashMap(uploadImage(imageFile, "servilink/service-provider-experience/"));
             } else {
                 throw new IntegrityValidation("Only accept image files!");
             }
@@ -72,17 +76,18 @@ public class ServiceProviderExperienceService implements IServiceProviderExperie
         return ResponseEntity.created(url).body(generateServiceProviderExperienceDataResponse(saveServiceProviderExperience));
     }
 
+    @Transactional
     @Override
     public ResponseEntity<ServiceProviderExperienceDataResponse> updateServiceProviderExperience
             (Long id, ServiceProviderExperienceDataUpdate dataUpdate, MultipartFile imageFile) throws IOException {
-        existsServiceProviderExperienceById(id);
+        MethodsUtil.existsById(id, serviceProviderExperienceRepository, "Service Provider Experience");
         ServiceProviderExperience serviceProviderExperience = serviceProviderExperienceRepository.getReferenceById(id);
         if(imageFile != null) {
-            if (FileImageFormatUtil.isFileImageFormat(imageFile)){
+            if (MethodsUtil.isFileImageFormat(imageFile)){
                 if(serviceProviderExperience.getImageUrl() != null){
                     cloudinary.uploader().destroy(serviceProviderExperience.getCloudinaryPublicId(), Map.of());
                 }
-                Map imageUploaded = new HashMap(uploadImage(imageFile));
+                Map imageUploaded = new HashMap(uploadImage(imageFile, "servilink/service-provider-experience/"));
                 serviceProviderExperience.setImageUrl(imageUploaded.get("secure_url").toString());
                 serviceProviderExperience.setCloudinaryPublicId(imageUploaded.get("public_id").toString());
             } else {
@@ -93,6 +98,17 @@ public class ServiceProviderExperienceService implements IServiceProviderExperie
         return ResponseEntity.ok(generateServiceProviderExperienceDataResponse(serviceProviderExperience));
     }
 
+    @Transactional
+    @Override
+    public ResponseEntity deleteServiceProviderExperience(Long id) throws IOException {
+        MethodsUtil.existsById(id, serviceProviderExperienceRepository, "Service Provider Experience");
+        ServiceProviderExperience serviceProviderExperience = serviceProviderExperienceRepository.getReferenceById(id);
+        if(serviceProviderExperience.getImageUrl() != null){
+            cloudinary.uploader().destroy(serviceProviderExperience.getCloudinaryPublicId(), Map.of());
+        }
+        serviceProviderExperienceRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 
     private ServiceProviderExperienceDataResponse generateServiceProviderExperienceDataResponse
             (ServiceProviderExperience serviceProviderExperience){
@@ -113,19 +129,15 @@ public class ServiceProviderExperienceService implements IServiceProviderExperie
                 );
     }
 
-    private void existsServiceProviderExperienceById(Long id){
-        if (serviceProviderExperienceRepository.existsById(id)){
-        } else {
-            throw new IntegrityValidation("Does not exists any Service provider with ID " + id);
-        }
-    }
-
-    private Map uploadImage(MultipartFile imageFile) {
+    @Override
+    public Map uploadImage(MultipartFile imageFile, String path) {
         try {
             return this.cloudinary.uploader().upload(imageFile.getBytes(), ObjectUtils.asMap(
-                    "folder", "servilink/service-provider-experience/"));
+                    "folder", path));
         } catch (IOException e) {
             throw new RuntimeException("Image uploading failed!");
         }
     }
+
+
 }

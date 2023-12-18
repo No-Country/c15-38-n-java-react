@@ -37,4 +37,7 @@ public interface IServiceProviderExperienceController {
     ResponseEntity<ServiceProviderExperienceDataResponse> updateServiceProviderExperience
             (@PathVariable Long id, @Valid ServiceProviderExperienceDataUpdate dataUpdate,
              @RequestParam("imageFile")MultipartFile imageFile) throws IOException;
+
+    @DeleteMapping(path = "/{id}")
+    ResponseEntity deleteServiceProviderExperience(@PathVariable Long id) throws IOException;
 }
