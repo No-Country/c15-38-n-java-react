@@ -3,7 +3,8 @@ import ServiceCard from "../components/ServiceCardComponent/ServiceCard";
 const HomeOrganizationData = [
   {
     title: "Ejemplo",
-    image: "./images/1.jpg",
+    description: "Corte en figuras",
+    image: "./images/download 4.jpg",
   },
   {
     title: "Ejemplo",

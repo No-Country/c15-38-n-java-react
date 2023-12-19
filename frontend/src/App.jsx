@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import ProviderDashboard from "./pages/ProviderDashboard";
 import AddService from "./pages/AddService";
 import UpdateProviderData from "./pages/UpdateProviderData";
+import Service from "./pages/Service";
 
 function App() {
   return (
@@ -36,6 +37,10 @@ function App() {
             <Route
               path="/signUp"
               element={<SignUp />}
+            />
+            <Route
+              path="/service"
+              element={<Service />}
             />
             <Route
               path="/providerDashboard"
