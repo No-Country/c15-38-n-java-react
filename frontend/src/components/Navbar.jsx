@@ -62,7 +62,7 @@ export default function Navbar() {
             )}
         </div>
       </div>
-
+      {/* testing */}
       {!isLoginPage && !isSignUpPage && (
         <div className="mt-6 overflow-x-auto hide-scrollbar">
           <ul className="flex space-x-4">
