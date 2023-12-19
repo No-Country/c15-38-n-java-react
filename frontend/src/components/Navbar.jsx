@@ -6,19 +6,19 @@ export default function Navbar() {
   const isSignUpPage = location.pathname === "/signUp";
   const isProviderDashboardPage = location.pathname === "/providerDashboard";
   const isAddServicePage = location.pathname === "/addService";
-  const isUpdateProviderDataPage = location.pathname === "/updateProviderData";
+  const profile = location.pathname === "/profile";
 
   const navigationOptions =
-    isProviderDashboardPage || isAddServicePage || isUpdateProviderDataPage
+    isProviderDashboardPage || isAddServicePage || profile
       ? [
           { to: "/providerDashboard", label: "Inicio" },
           { to: "/addService", label: "Agregar servicio" },
-          { to: "/updateProviderData", label: "Actualizar datos" },
+          { to: "/profile", label: "Perfil" },
           { to: "/", label: "Cerrar Sesion" },
         ]
       : !isLoginPage && !isSignUpPage
       ? [
-          { to: "/logIn", label: "Limpieza del hogar" },
+          { to: "/", label: "Limpieza del hogar" },
           { to: "/gardeningServices", label: "Mantenimiento del jardín" },
           { to: "/homeOrganization", label: "Organización del hogar" },
         ]
@@ -45,7 +45,7 @@ export default function Navbar() {
             !isSignUpPage &&
             !isProviderDashboardPage &&
             !isAddServicePage &&
-            !isUpdateProviderDataPage && (
+            !profile && (
               <>
                 <Link to="/logIn">
                   <button className="text-white text-xs lg:text-base bg-black rounded-lg w-[60px] h-[30px] lg:w-[98px] lg:h-[40px]">

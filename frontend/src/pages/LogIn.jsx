@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { setUser } from "../redux/userSlice"; // Replace with the correct path
 
 export default function LogIn() {
@@ -21,30 +21,24 @@ export default function LogIn() {
     e.preventDefault();
 
     try {
-      // Realizar la solicitud de inicio de sesión aquí
       const response = await axios.post(
         "https://servilink-api.onrender.com/api/auth/login",
         formData
       );
 
-      // Manejar la respuesta aquí
       console.log("Inicio de sesión exitoso:", response);
 
-      // Verificar si se proporciona un token en la respuesta
       const token = response.data.token;
 
       if (token) {
-        // Dispatch setUser action with the username
-        dispatch(setUser({ username: response.data.username })); // Adjust this based on your API response
+        dispatch(setUser({ username: response.data.username }));
 
-        // Almacenar el token de forma segura (por ejemplo, mediante cookies)
         document.cookie = `token=${token}; path=/; HttpOnly; Secure`;
       }
 
       // Redirigir a la página del dashboard o a donde desees
       navigate("/providerDashboard");
     } catch (error) {
-      // Manejar errores aquí
       console.error("Error al iniciar sesión:", error);
       // Mostrar un mensaje de error al usuario
       // Puedes establecer un estado de error y mostrarlo en el formulario

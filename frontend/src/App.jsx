@@ -8,7 +8,7 @@ import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import ProviderDashboard from "./pages/ProviderDashboard";
 import AddService from "./pages/AddService";
-import UpdateProviderData from "./pages/UpdateProviderData";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -47,8 +47,8 @@ function App() {
               element={<AddService />}
             />
             <Route
-              path="/updateProviderData"
-              element={<UpdateProviderData />}
+              path="/profile"
+              element={<Profile />}
             />
           </Routes>
         </div>
