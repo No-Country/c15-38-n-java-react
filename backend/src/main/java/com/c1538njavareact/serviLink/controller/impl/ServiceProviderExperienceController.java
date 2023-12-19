@@ -4,6 +4,7 @@ import com.c1538njavareact.serviLink.controller.IServiceProviderExperienceContro
 import com.c1538njavareact.serviLink.model.dto.ServiceProviderExperienceDataCreate;
 import com.c1538njavareact.serviLink.model.dto.ServiceProviderExperienceDataList;
 import com.c1538njavareact.serviLink.model.dto.ServiceProviderExperienceDataResponse;
+import com.c1538njavareact.serviLink.model.dto.ServiceProviderExperienceDataUpdate;
 import com.c1538njavareact.serviLink.service.IServiceProviderExperienceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,8 +39,20 @@ public class ServiceProviderExperienceController implements IServiceProviderExpe
     }
 
     @Override
-    public ResponseEntity<ServiceProviderExperienceDataResponse> createdServiceProviderExperience(ServiceProviderExperienceDataCreate serviceProviderExperienceData, UriComponentsBuilder uriComponentsBuilder, MultipartFile imageFile) throws IOException {
+    public ResponseEntity<ServiceProviderExperienceDataResponse> createdServiceProviderExperience
+            (ServiceProviderExperienceDataCreate serviceProviderExperienceData, UriComponentsBuilder uriComponentsBuilder, MultipartFile imageFile) throws IOException {
         return serviceProviderExperience.createdServiceProviderExperience(serviceProviderExperienceData, uriComponentsBuilder, imageFile);
+    }
+
+    @Override
+    public ResponseEntity<ServiceProviderExperienceDataResponse> updateServiceProviderExperience
+            (Long id, ServiceProviderExperienceDataUpdate dataUpdate, MultipartFile imageFile) throws IOException {
+        return serviceProviderExperience.updateServiceProviderExperience(id, dataUpdate, imageFile);
+    }
+
+    @Override
+    public ResponseEntity deleteServiceProviderExperience(Long id) throws IOException {
+        return serviceProviderExperience.deleteServiceProviderExperience(id);
     }
 
 }

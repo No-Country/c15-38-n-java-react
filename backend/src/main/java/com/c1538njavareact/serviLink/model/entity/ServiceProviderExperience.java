@@ -1,5 +1,6 @@
 package com.c1538njavareact.serviLink.model.entity;
 
+import com.c1538njavareact.serviLink.model.dto.ServiceProviderExperienceDataUpdate;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -38,4 +39,13 @@ public class ServiceProviderExperience {
 
     }
 
+    public void updateData(ServiceProviderExperienceDataUpdate dataUpdate) {
+        if (dataUpdate.altText() != null){
+            this.altText = dataUpdate.altText();
+        }
+        if (dataUpdate.experienceDescription() != null){
+            this.experienceDescription = dataUpdate.experienceDescription();
+        }
+
+    }
 }
