@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
+
 @Validated
 public interface IServiceProviderController {
     @GetMapping("/{id}")

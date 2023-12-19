@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/logo.svg";
 
 export default function Navbar() {
   const location = useLocation();
@@ -7,14 +6,15 @@ export default function Navbar() {
   const isSignUpPage = location.pathname === "/signUp";
   const isProviderDashboardPage = location.pathname === "/providerDashboard";
   const isAddServicePage = location.pathname === "/addService";
-  const isUpdateProviderDataPage = location.pathname === "/updateProviderData";
+  const profile = location.pathname === "/profile";
 
   const navigationOptions =
-    isProviderDashboardPage || isAddServicePage || isUpdateProviderDataPage
+    isProviderDashboardPage || isAddServicePage || profile
       ? [
           { to: "/providerDashboard", label: "Inicio" },
           { to: "/addService", label: "Agregar servicio" },
-          { to: "/updateProviderData", label: "Actualizar datos" },
+          { to: "/profile", label: "Perfil" },
+          { to: "/", label: "Cerrar Sesion" },
         ]
       : !isLoginPage && !isSignUpPage
       ? [
@@ -31,7 +31,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <img
               className="w-6 xl:w-8"
-              src={logo}
+              src="./images/Logo.svg"
               alt="Logo"
             />
             <span className="hidden text-xl font-medium md:block ">
@@ -45,7 +45,7 @@ export default function Navbar() {
             !isSignUpPage &&
             !isProviderDashboardPage &&
             !isAddServicePage &&
-            !isUpdateProviderDataPage && (
+            !profile && (
               <>
                 <Link to="/logIn">
                   <button className="text-white text-xs lg:text-base bg-black rounded-lg w-[60px] h-[30px] lg:w-[98px] lg:h-[40px]">

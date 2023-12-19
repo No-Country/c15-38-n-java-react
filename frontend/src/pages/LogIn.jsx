@@ -1,6 +1,50 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/userSlice"; // Replace with the correct path
 
 export default function LogIn() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "https://servilink-api.onrender.com/api/auth/login",
+        formData
+      );
+
+      console.log("Inicio de sesión exitoso:", response);
+
+      const token = response.data.token;
+
+      if (token) {
+        dispatch(setUser({ username: response.data.username }));
+
+        document.cookie = `token=${token}; path=/; HttpOnly; Secure`;
+      }
+
+      // Redirigir a la página del dashboard o a donde desees
+      navigate("/providerDashboard");
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+      // Mostrar un mensaje de error al usuario
+      // Puedes establecer un estado de error y mostrarlo en el formulario
+    }
+  };
+
   return (
     <div className="flex items-center justify-center mt-[150px]">
       <section className="border rounded-2xl w-[480px] p-[48px]">
@@ -8,11 +52,11 @@ export default function LogIn() {
           <h1 className="text-3xl font-bold">Log in</h1>
         </div>
         <div>
-          <from>
+          <form onSubmit={handleSubmit}>
             <div>
               <div className="h-[54px] flex items-end justify-between mb-4">
                 <label
-                  htmlFor="email"
+                  htmlFor="username"
                   className="text-base font-semibold"
                 >
                   Email
@@ -26,42 +70,42 @@ export default function LogIn() {
               </div>
               <div className="h-[51px]">
                 <input
-                  type="text"
-                  name="email"
+                  type="email"
+                  name="username"
+                  onChange={handleChange}
                   className="w-full h-full border rounded p-[14px]"
-                ></input>
+                />
               </div>
             </div>
             <div>
               <div className="h-[54px] flex items-end justify-between mb-4">
                 <label
-                  htmlFor="current-password"
+                  htmlFor="password"
                   className="text-base font-semibold"
                 >
                   Password
                 </label>
-                <span className="text-sm font-semibold">
-                  {/*<svg></svg>*/}
-                  Show
-                </span>
+                <span className="text-sm font-semibold">Show</span>
               </div>
               <div className="h-[51px]">
                 <input
-                  type="text"
-                  name="email"
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
                   className="w-full h-full border rounded p-[14px]"
-                ></input>
+                />
               </div>
               <div className="h-[24px] my-[18px] text-sm font-normal text-center">
-                <a>Forgot password?</a>
+                <Link to="/forgotPassword">Forgot password?</Link>
               </div>
             </div>
-            <Link to="/providerDashboard">
-              <button className="bg-black border rounded w-full h-[50px] text-lg text-white">
-                Log in
-              </button>
-            </Link>
-          </from>
+            <button
+              type="submit"
+              className="bg-black border rounded w-full h-[50px] text-lg text-white"
+            >
+              Log in
+            </button>
+          </form>
           <div className="my-[18px] text-center">
             <span>-- or --</span>
           </div>
