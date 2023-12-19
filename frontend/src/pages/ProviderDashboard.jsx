@@ -1,33 +1,27 @@
-import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-const ServiceBox = ({ title, value, customClass }) => (
-  <div
-    className={`flex flex-col justify-between h-[128px] bg-gray-200 rounded p-4 ${customClass}`}
-  >
+const ServiceBox = ({ title, value }) => (
+  <div className="flex flex-col justify-between h-[128px] bg-gray-200 rounded p-4">
     <span className="font-medium">{title}</span>
     <span className="text-[37px]">{value}</span>
   </div>
 );
 
-ServiceBox.propTypes = {
-  title: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  customClass: PropTypes.string, // Optional custom class
-};
-
-const ProviderDashboard = () => {
-  const userName = useSelector((state) => state.user.username);
-
+export default function ProviderDashboard() {
   const services = [
     { name: "Servicio 1", id: 1 },
     { name: "Servicio 2", id: 2 },
     { name: "Servicio 3", id: 3 },
   ];
 
+  ServiceBox.propTypes = {
+    title: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+
   return (
     <section className="mt-[150px] lg:max-w-[59rem] px-4 md:px-10 lg:px-0 xl:max-w-[80rem] 2xl:max-w-[90rem] mx-auto mb-16">
-      <h1 className="text-lg font-medium">Bienvenido {userName}</h1>
+      <h1 className="text-lg font-medium">Bienvenido [Nombre del proveedor]</h1>
 
       <div className="grid grid-cols-1 gap-8 mt-8 lg:grid-cols-2">
         <ServiceBox
@@ -71,6 +65,4 @@ const ProviderDashboard = () => {
       </div>
     </section>
   );
-};
-
-export default ProviderDashboard;
+}

@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { registrarUsuario } from "/api/api.js";
 import { Link } from "react-router-dom";
+import { registrarUsuario } from "/api/api.js";
 
 export default function SignUp() {
-  const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
-    firstName: "",
+    name: "",
     email: "",
     password: "",
   });
@@ -23,13 +20,10 @@ export default function SignUp() {
       const response = await registrarUsuario(formData);
 
       // Manejar la respuesta aquí
-      navigate("/providerDashboard");
       console.log("Registro exitoso:", response);
     } catch (error) {
       // Manejar errores aquí
       console.error("Error al registrar:", error);
-      // Mostrar un mensaje de error al usuario
-      // Puedes establecer un estado de error y mostrarlo en el formulario
     }
   };
 
@@ -44,7 +38,7 @@ export default function SignUp() {
             <div>
               <div className="h-[54px] flex items-end justify-between">
                 <label
-                  htmlFor="firstName"
+                  htmlFor="name"
                   className="text-base font-semibold"
                 >
                   Nombre
@@ -88,10 +82,10 @@ export default function SignUp() {
             <div>
               <div className="h-[54px] flex items-end justify-between">
                 <label
-                  htmlFor="password"
+                  htmlFor="current-password"
                   className="text-base font-semibold"
                 >
-                  Contraseña
+                  Contranseña
                 </label>
                 <span className="text-sm font-semibold">Show</span>
               </div>
