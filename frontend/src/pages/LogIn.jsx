@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from 'react-redux';
+import { setUser } from "../redux/userSlice"; // Replace with the correct path
 
 export default function LogIn() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -17,16 +22,32 @@ export default function LogIn() {
 
     try {
       // Realizar la solicitud de inicio de sesión aquí
-      const response = await axios.post("https://servilink-api.onrender.com/api/auth/login", formData);
+      const response = await axios.post(
+        "https://servilink-api.onrender.com/api/auth/login",
+        formData
+      );
 
-      // Manejar la respuesta aquí, por ejemplo, redirigir al usuario a la página de inicio después del inicio de sesión
+      // Manejar la respuesta aquí
       console.log("Inicio de sesión exitoso:", response);
 
+      // Verificar si se proporciona un token en la respuesta
+      const token = response.data.token;
+
+      if (token) {
+        // Dispatch setUser action with the username
+        dispatch(setUser({ username: response.data.username })); // Adjust this based on your API response
+
+        // Almacenar el token de forma segura (por ejemplo, mediante cookies)
+        document.cookie = `token=${token}; path=/; HttpOnly; Secure`;
+      }
+
       // Redirigir a la página del dashboard o a donde desees
-      history.push("/providerDashboard");
+      navigate("/providerDashboard");
     } catch (error) {
       // Manejar errores aquí
       console.error("Error al iniciar sesión:", error);
+      // Mostrar un mensaje de error al usuario
+      // Puedes establecer un estado de error y mostrarlo en el formulario
     }
   };
 
@@ -40,7 +61,10 @@ export default function LogIn() {
           <form onSubmit={handleSubmit}>
             <div>
               <div className="h-[54px] flex items-end justify-between mb-4">
-                <label htmlFor="email" className="text-base font-semibold">
+                <label
+                  htmlFor="username"
+                  className="text-base font-semibold"
+                >
                   Email
                 </label>
                 <span className="text-sm font-normal">
@@ -52,8 +76,8 @@ export default function LogIn() {
               </div>
               <div className="h-[51px]">
                 <input
-                  type="text"
-                  name="email"
+                  type="email"
+                  name="username"
                   onChange={handleChange}
                   className="w-full h-full border rounded p-[14px]"
                 />
@@ -67,10 +91,7 @@ export default function LogIn() {
                 >
                   Password
                 </label>
-                <span className="text-sm font-semibold">
-                  {/*<svg></svg>*/}
-                  Show
-                </span>
+                <span className="text-sm font-semibold">Show</span>
               </div>
               <div className="h-[51px]">
                 <input
