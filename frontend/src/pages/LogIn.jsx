@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setUser } from "../redux/userSlice"; // Replace with the correct path
+import { setUser } from "../redux/userSlice";
+// import jwt from "jsonwebtoken";
 
 export default function LogIn() {
   const navigate = useNavigate();
