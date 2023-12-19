@@ -46,8 +46,7 @@ public class SecurityConfigurations {
             "/docs",
             "/signup",
             "/login",
-            "/api/service/get-all-services",
-            "/api/service-category/get-all-categories"
+            "/api/service/get-all-services"
     };
 
     @Bean

@@ -31,7 +31,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <img
               className="w-6 xl:w-8"
-              src="./images/logo.svg"
+              src="./images/Logo.svg"
               alt="Logo"
             />
             <span className="hidden text-xl font-medium md:block ">

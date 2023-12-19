@@ -13,7 +13,7 @@ public record ServiceProviderDataList(Long id, ProviderDataGetOne providerDataGe
                         serviceProvider.getProvider().getPhoneNumber(), serviceProvider.getProvider().getProfileImageUrl()
                 ),
                 new Service(serviceProvider.getService().getId(),
-                        serviceProvider.getService().getName(), serviceProvider.getService().getServiceCategory()
+                        serviceProvider.getService().getName()
                 ),
                 serviceProvider.getDescription(), serviceProvider.getPrice());
     }
