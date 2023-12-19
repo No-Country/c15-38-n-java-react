@@ -6,7 +6,7 @@ export default function Footer() {
   const [year] = useState(new Date().getFullYear());
 
   return (
-    <footer className="xl:max-w-[80rem] 2xl:max-w-[90rem] mx-auto px-4 md:px-10 lg:px-0 mt-16 lg:mt-auto lg:max-w-[59rem]">
+    <footer className="xl:max-w-[80rem] 2xl:max-w-[90rem] mx-auto px-4 md:px-10 lg:px-0 mt-auto lg:max-w-[59rem]">
       <div className="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2">
           <Link
