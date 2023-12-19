@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import logo from "../assets/logo.svg";
 
 export default function Footer() {
   const [year] = useState(new Date().getFullYear());
@@ -16,7 +17,7 @@ export default function Footer() {
           >
             <img
               className="w-6 xl:w-8"
-              src="./images/Logo.svg"
+              src={logo}
               alt="logo"
             />
             <span className="ml-2 text-xl font-medium">ServiLink</span>
