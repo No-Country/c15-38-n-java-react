@@ -19,10 +19,10 @@ export default function SignUp() {
     try {
       const response = await registrarUsuario(formData);
 
-      // Manejar la respuesta aquí
+      // Manejp de respuesta
       console.log("Registro exitoso:", response);
     } catch (error) {
-      // Manejar errores aquí
+      // Manejo de errores
       console.error("Error al registrar:", error);
     }
   };
