@@ -1,5 +1,7 @@
 <div align="center">
-  <img src="https://github.com/No-Country/c15-38-n-java-react/assets/95196431/396e11d7-7d2f-4890-a588-a06ba7579529"/>
+  <a href="https://servilink.vercel.app/" target="_blank">
+    <img src="https://github.com/No-Country/c15-38-n-java-react/assets/95196431/396e11d7-7d2f-4890-a588-a06ba7579529"/>
+  </a>
 </div>
 
 <div align='center'>
@@ -13,6 +15,11 @@
         <img  src="https://img.shields.io/badge/REPORTAR_BUG-343B4E?style=for-the-badge"/>
     </a>
 </div>
+<br>
+<p>
+ServiLink es una aplicación que te ayuda a mantener tu hogar en óptimas condiciones, conectándote con profesionales que se encargan de la limpieza, el mantenimiento y la organización de tu espacio. Con ServiLink, puedes solicitar y programar servicios de calidad desde su aplicación web, sin complicaciones ni intermediarios. ServiLink te ofrece la posibilidad de elegir entre una variedad de opciones, según tus necesidades y preferencias, y de ver información detallada sobre los profesionales que realizarán el trabajo, como su descripción del servicio, su experiencia y el costo del servicio. ServiLink también es una oportunidad para los profesionales que quieran ofrecer sus servicios y formar parte de una red de confianza y calidad. ServiLink es la solución que te facilita la vida y te permite disfrutar de un hogar limpio, ordenado y confortable.
+</p>
+<br>
 
 ## 🛠️ Tecnologías utilizadas
 
@@ -61,7 +68,7 @@
 </div>
 <br>
 
-## 👨‍💻 Equipo ( c14-22-ft-java-react )
+## 👨‍💻 Equipo ( c15-38-n-java-react )
 <table>
   <tr>
     <td>
