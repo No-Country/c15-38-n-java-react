@@ -44,9 +44,8 @@ public class SecurityConfigurations {
             "/actuator/*",
             "/swagger-ui/**",
             "/docs",
-            "/signup",
-            "/login",
-            "/api/service/get-all-services"
+            "/api/service/get-all-services",
+            "/api/service-provider/get-all-by-service/**"
     };
 
     @Bean
