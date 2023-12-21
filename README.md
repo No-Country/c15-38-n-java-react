@@ -112,7 +112,7 @@
     <td>
       <div align="center">
         <a href="https://github.com/A-Picasso" target="_blank" rel="author">
-          <img width="110" src="https://github.com/No-Country/c15-38-n-java-react/assets/95196431/46b4704e-3a2b-4b0d-81e8-13bcf8b565de"/>
+          <img width="110" src="https://github.com/No-Country/c15-38-n-java-react/assets/95196431/bc7c5f56-8e4f-4a70-af77-273e79ff0711"/>
         </a>
           <h4 style="margin-top: 1rem;">José Alberto Picasso Martínez</h4>
           <h5 style="margin-top: 1rem;">Back-End  |  DevOps</h5>
