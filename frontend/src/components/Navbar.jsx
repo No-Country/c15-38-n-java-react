@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import logo from "../assets/logo.svg";
 
 export default function Navbar() {
   const location = useLocation();
@@ -14,6 +15,7 @@ export default function Navbar() {
           { to: "/providerDashboard", label: "Inicio" },
           { to: "/addService", label: "Agregar servicio" },
           { to: "/updateProviderData", label: "Actualizar datos" },
+          { to: "/", label: "Cerrar Sesion" },
         ]
       : !isLoginPage && !isSignUpPage
       ? [
@@ -30,7 +32,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <img
               className="w-6 xl:w-8"
-              src="/public/images/logo.svg"
+              src={logo}
               alt="Logo"
             />
             <span className="hidden text-xl font-medium md:block ">
@@ -60,7 +62,7 @@ export default function Navbar() {
             )}
         </div>
       </div>
-
+      {/* testing */}
       {!isLoginPage && !isSignUpPage && (
         <div className="mt-6 overflow-x-auto hide-scrollbar">
           <ul className="flex space-x-4">

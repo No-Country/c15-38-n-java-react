@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function LogIn() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -16,16 +18,27 @@ export default function LogIn() {
     e.preventDefault();
 
     try {
-      // Realizar la solicitud de inicio de sesión aquí
-      const response = await axios.post("https://servilink-api.onrender.com/api/auth/login", formData);
+      // Solicitud de inicio de sesión
+      const response = await axios.post(
+        "https://servilink-api.onrender.com/api/auth/login",
+        formData
+      );
 
-      // Manejar la respuesta aquí, por ejemplo, redirigir al usuario a la página de inicio después del inicio de sesión
+      // Manejo de respuesta
       console.log("Inicio de sesión exitoso:", response);
 
-      // Redirigir a la página del dashboard o a donde desees
-      history.push("/providerDashboard");
+      // Verificacion de Token
+      const token = response.data.token;
+
+      if (token) {
+        // Almacenar el token en local storage o cookies
+        localStorage.setItem("token", token);
+      }
+
+      // Redirigir a la página del dashboard
+      navigate("/providerDashboard");
     } catch (error) {
-      // Manejar errores aquí
+      // Manejo de errores
       console.error("Error al iniciar sesión:", error);
     }
   };
@@ -40,7 +53,10 @@ export default function LogIn() {
           <form onSubmit={handleSubmit}>
             <div>
               <div className="h-[54px] flex items-end justify-between mb-4">
-                <label htmlFor="email" className="text-base font-semibold">
+                <label
+                  htmlFor="email"
+                  className="text-base font-semibold"
+                >
                   Email
                 </label>
                 <span className="text-sm font-normal">
@@ -53,7 +69,7 @@ export default function LogIn() {
               <div className="h-[51px]">
                 <input
                   type="text"
-                  name="email"
+                  name="username"
                   onChange={handleChange}
                   className="w-full h-full border rounded p-[14px]"
                 />

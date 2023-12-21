@@ -61,7 +61,7 @@ public class UserService implements UserDetailsService, IUserService {
 
     @Override
     public User findByUsername(String username) {
-        return null;
+        return (User)iUserRepository.findByUsername(username);
     }
 
     @Override
