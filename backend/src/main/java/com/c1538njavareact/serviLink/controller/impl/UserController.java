@@ -4,6 +4,7 @@ import com.c1538njavareact.serviLink.controller.IUserController;
 import com.c1538njavareact.serviLink.model.dto.JwtTokenData;
 import com.c1538njavareact.serviLink.model.dto.UserDataLogin;
 import com.c1538njavareact.serviLink.model.dto.UserDataSignUp;
+import com.c1538njavareact.serviLink.model.entity.User;
 import com.c1538njavareact.serviLink.service.impl.UserService;
 import com.c1538njavareact.serviLink.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,12 @@ public class UserController implements IUserController {
     private JWTUtil jwtService;
 
     @Override
-    public ResponseEntity authenticateUser(UserDataLogin userDataLogin) {
+    public ResponseEntity<JwtTokenData> authenticateUser(UserDataLogin userDataLogin) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDataLogin.username(),
                 userDataLogin.password()));
         String jwtToken = jwtService.generateToken(userDataLogin.username());
-        return ResponseEntity.ok(new JwtTokenData(jwtToken));
+        User user = userService.findByUsername(userDataLogin.username());
+        return ResponseEntity.ok(new JwtTokenData(user.getId(), user.getProvider().getFirstName(), jwtToken));
     }
 
     @Override

@@ -23,7 +23,7 @@ public class OpenAPIConfig {
                                 .url("http://www.apache.org/licenses/"))
                         .contact(new Contact()
                                 .name("DEMO")
-                                .url("https://demo.vercel.app/"))
+                                .url("https://servilink.vercel.app/"))
                 );
     }
 

@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registrarUsuario } from "/api/api.js";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,10 +21,13 @@ export default function SignUp() {
     try {
       const response = await registrarUsuario(formData);
 
-      // Manejar la respuesta aquí, por ejemplo, redirigir al usuario a la página de inicio de sesión
+      // Handle the response
       console.log("Registro exitoso:", response);
+
+      // Redirect to the /providerDashboard route
+      navigate("/providerDashboard");
     } catch (error) {
-      // Manejar errores aquí
+      // Handle errors
       console.error("Error al registrar:", error);
     }
   };
@@ -54,7 +59,7 @@ export default function SignUp() {
                 <input
                   onChange={handleChange}
                   type="text"
-                  name="name"
+                  name="firstName"
                   className="w-full h-full border rounded p-[14px]"
                 />
               </div>
@@ -92,7 +97,7 @@ export default function SignUp() {
               <div className="h-[51px] mt-4">
                 <input
                   onChange={handleChange}
-                  type="text"
+                  type="password"
                   name="password"
                   className="w-full h-full border rounded p-[14px]"
                 />

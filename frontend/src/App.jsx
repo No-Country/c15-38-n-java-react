@@ -11,7 +11,6 @@ import AddService from "./pages/AddService";
 import UpdateProviderData from "./pages/UpdateProviderData";
 import Service from "./pages/Service";
 
-
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -24,11 +23,15 @@ function App() {
               element={<HomeCleaning />}
             />
             <Route
-              path="/gardeningServices"
+              path="/Limpiezadelhogar"
+              element={<HomeCleaning />}
+            />
+            <Route
+              path="/Mantenimientodeljardín"
               element={<GardeningServices />}
             />
             <Route
-              path="/homeOrganization"
+              path="/Organizacióndelhogar"
               element={<HomeOrganization />}
             />
             <Route
@@ -55,7 +58,6 @@ function App() {
             <Route
               path="/updateProviderData"
               element={<UpdateProviderData />}
-
             />
           </Routes>
         </div>

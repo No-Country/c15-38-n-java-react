@@ -17,9 +17,5 @@ public class Service {
     @Column(name = "services_id")
     private Long id;
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "services_category_id", nullable = false)
-    private ServiceCategory serviceCategory;
-
 
 }

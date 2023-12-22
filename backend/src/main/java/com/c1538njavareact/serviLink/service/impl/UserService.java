@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -22,14 +23,15 @@ import java.net.URI;
 @Service
 public class UserService implements UserDetailsService, IUserService {
     @Autowired
-    private IUserRepository IUserRepository;
+    private IUserRepository iUserRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetails user = IUserRepository.findByUsername(username);
+        UserDetails user = iUserRepository.findByUsername(username);
         if(user.isEnabled()){
-            return IUserRepository.findByUsername(username);
+            return iUserRepository.findByUsername(username);
         } else {
             throw new AuthValidation(
                     "This user is not active");
@@ -37,20 +39,21 @@ public class UserService implements UserDetailsService, IUserService {
 
     }
 
+    @Transactional
     @Override
     public ResponseEntity<UserDataLogin> createUser(UserDataSignUp userDataSignUp, UriComponentsBuilder uriComponentsBuilder) {
-        if (IUserRepository.existsByUsername(userDataSignUp.email())) {
+        if (iUserRepository.existsByUsername(userDataSignUp.email())) {
             throw new IntegrityValidation(
                     "This email already exists");
         }
 
-        User user =  IUserRepository.saveAndFlush(new User(userDataSignUp, passwordEncoder.encode(userDataSignUp.password())));
+        User user =  iUserRepository.saveAndFlush(new User(userDataSignUp, passwordEncoder.encode(userDataSignUp.password())));
         UserDataLogin providerDataLogin = new UserDataLogin(user.getId(), user.getUsername(), user.getPassword());
 
         Provider provider = new Provider(userDataSignUp.firstName(), userDataSignUp.email(), user);
         user.setProvider(provider);
 
-        IUserRepository.saveAndFlush(user);
+        iUserRepository.saveAndFlush(user);
 
         URI url = uriComponentsBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(url).body(providerDataLogin);
@@ -58,7 +61,7 @@ public class UserService implements UserDetailsService, IUserService {
 
     @Override
     public User findByUsername(String username) {
-        return null;
+        return (User)iUserRepository.findByUsername(username);
     }
 
     @Override

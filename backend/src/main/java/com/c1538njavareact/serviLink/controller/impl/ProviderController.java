@@ -8,6 +8,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 import static com.c1538njavareact.serviLink.config.ApiConstants.PROVIDER_URI;
 
@@ -24,8 +27,8 @@ public class ProviderController implements IProviderController {
 
     @Override
     @Transactional
-    public ResponseEntity<ProviderDataGetOne> updateProvider(Long id, ProviderDataUpdate providerDataUpdate) {
-        return providerService.updateProvider(id, providerDataUpdate);
+    public ResponseEntity<ProviderDataGetOne> updateProvider(Long id, ProviderDataUpdate providerDataUpdate, @RequestParam(value ="imageFile", required=false) MultipartFile imageFile) throws IOException {
+        return providerService.updateProvider(id, providerDataUpdate, imageFile);
     }
 
     @Override

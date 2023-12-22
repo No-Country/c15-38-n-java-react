@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { jwtDecode } from "jwt-decode"; // Assuming jwtDecode is correctly imported
+import Cookies from "js-cookie"; // Import the Cookies library
 
 const ServiceBox = ({ title, value }) => (
   <div className="flex flex-col justify-between h-[128px] bg-gray-200 rounded p-4">
@@ -7,32 +10,42 @@ const ServiceBox = ({ title, value }) => (
   </div>
 );
 
+ServiceBox.propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
 export default function ProviderDashboard() {
+  const [providerName, setProviderName] = useState(""); // State to hold provider's name
+
+  useEffect(() => {
+    // Retrieve token from cookies
+    const storedToken = Cookies.get("token");
+
+    if (storedToken) {
+      const decoded = jwtDecode(storedToken);
+      setProviderName(decoded.sub);
+    }
+  }, []);
+
   const services = [
     { name: "Servicio 1", id: 1 },
     { name: "Servicio 2", id: 2 },
     { name: "Servicio 3", id: 3 },
   ];
 
-  ServiceBox.propTypes = {
-    title: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
-  };
-
   return (
     <section className="mt-[150px] lg:max-w-[59rem] px-4 md:px-10 lg:px-0 xl:max-w-[80rem] 2xl:max-w-[90rem] mx-auto mb-16">
-      <h1 className="text-lg font-medium">Bienvenido [Nombre del proveedor]</h1>
+      <h1 className="text-lg font-medium">Bienvenido {providerName}</h1>
 
       <div className="grid grid-cols-1 gap-8 mt-8 lg:grid-cols-2">
         <ServiceBox
           title="Servicios en total"
           value={1}
-          customClass="mi-estilo-personalizado"
         />
         <ServiceBox
           title="Servicios activos"
           value={1}
-          customClass="mi-estilo-personalizado"
         />
       </div>
 
