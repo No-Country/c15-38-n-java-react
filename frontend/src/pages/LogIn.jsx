@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode"
 
 export default function LogIn() {
   const navigate = useNavigate();
@@ -18,27 +20,31 @@ export default function LogIn() {
     e.preventDefault();
 
     try {
-      // Solicitud de inicio de sesión
       const response = await axios.post(
         "https://servilink-api.onrender.com/api/auth/login",
         formData
       );
 
-      // Manejo de respuesta
-      console.log("Inicio de sesión exitoso:", response);
-
-      // Verificacion de Token
-      const token = response.data.token;
+      const token = response.data.jwtToken;
 
       if (token) {
-        // Almacenar el token en local storage o cookies
-        localStorage.setItem("token", token);
+        // Decode the token
+        const decodedToken = jwtDecode(token);
+
+        // Log the decoded token to the console
+        console.log("Decoded Token:", decodedToken);
+
+        // Store the decoded token in state or wherever needed
+        // Example: setDecodedToken(decodedToken);
+
+        // Store the token in cookies
+        Cookies.set("token", token, { expires: 7 });
+
+        console.log("Token:", token);
       }
 
-      // Redirigir a la página del dashboard
       navigate("/providerDashboard");
     } catch (error) {
-      // Manejo de errores
       console.error("Error al iniciar sesión:", error);
     }
   };
