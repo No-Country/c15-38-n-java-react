@@ -1,8 +1,28 @@
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/logo.svg";
 
 export default function Navbar() {
   const location = useLocation();
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from the backend API
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://servilink-api.onrender.com/api/service/get-all-services"
+        );
+        const data = await response.json();
+        setServices(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // Call the fetch function
+    fetchData();
+  }, []); // Empty dependency array ensures that this effect runs only once on component mount
+
   const isLoginPage = location.pathname === "/logIn";
   const isSignUpPage = location.pathname === "/signUp";
   const isProviderDashboardPage = location.pathname === "/providerDashboard";
@@ -15,24 +35,23 @@ export default function Navbar() {
           { to: "/providerDashboard", label: "Inicio" },
           { to: "/addService", label: "Agregar servicio" },
           { to: "/updateProviderData", label: "Actualizar datos" },
-          { to: "/", label: "Cerrar Sesion" },
+          { to: "/Limpiezadelhogar", label: "Cerrar Sesion" },
         ]
       : !isLoginPage && !isSignUpPage
-      ? [
-          { to: "/", label: "Limpieza del hogar" },
-          { to: "/gardeningServices", label: "Mantenimiento del jardín" },
-          { to: "/homeOrganization", label: "Organización del hogar" },
-        ]
+      ? services.map((service) => ({
+          to: `/${service.service.replace(/\s+/g, "")}`,
+          label: service.service,
+        }))
       : [];
 
   return (
     <nav className="fixed top-0 left-0 z-10 w-full px-4 md:px-10 pt-4 overflow-hidden lg:px-0 bg-white lg:w-[59rem] lg:left-1/2 xl:w-[80rem] 2xl:w-[90rem] lg:-translate-x-1/2 lg:transform">
       <div className="flex items-center justify-between">
-        <Link to="/">
+        <Link to="/Limpiezadelhogar">
           <div className="flex items-center gap-2">
             <img
               className="w-6 xl:w-8"
-              src={logo}
+              src="./images/logo.svg"
               alt="Logo"
             />
             <span className="hidden text-xl font-medium md:block ">
@@ -62,7 +81,7 @@ export default function Navbar() {
             )}
         </div>
       </div>
-      {/* testing */}
+
       {!isLoginPage && !isSignUpPage && (
         <div className="mt-6 overflow-x-auto hide-scrollbar">
           <ul className="flex space-x-4">

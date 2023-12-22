@@ -1,25 +1,72 @@
-// ServiceForm.js
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { agregarServicio } from "../../api/api";
 
 export default function AddService() {
   const [serviceType, setServiceType] = useState("");
   const [description, setDescription] = useState("");
   const [photos, setPhotos] = useState([]);
   const [price, setPrice] = useState("");
+  const [services, setServices] = useState([]);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Aquí puedes enviar los datos al proveedor de servicios o realizar cualquier otra acción
-    const formData = {
-      serviceType,
-      description,
-      photos,
-      price,
+  useEffect(() => {
+    // Fetch services from the backend API
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(
+          "https://servilink-api.onrender.com/api/service/get-all-services"
+        );
+        const data = await response.json();
+        setServices(data);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
     };
 
-    console.log(formData);
-    // Puedes hacer una solicitud HTTP para enviar los datos al backend aquí
+    // Call the fetch function
+    fetchServices();
+  }, []); // Empty dependency array
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Form validation
+    if (!serviceType || !photos.length || !price) {
+      alert("Por favor, complete todos los campos obligatorios.");
+      return;
+    }
+
+    const selectedService = services.find(
+      (service) => service.service === serviceType
+    );
+
+    const formData = {
+      idProvider: 0,
+      idService: selectedService.id,
+      description,
+      price: parseFloat(price),
+    };
+
+    try {
+      const result = await agregarServicio(formData);
+
+      console.log("Service added successfully!", result);
+
+      setServiceType("");
+      setDescription("");
+      setPhotos([]);
+      setPrice("");
+      setIsFormSubmitted(true);
+
+      setTimeout(() => {
+        setIsFormSubmitted(false);
+      }, 3000);
+    } catch (error) {
+      console.error("Error adding service in ServiceForm:", error);
+      alert(
+        "Hubo un error al agregar el servicio. Por favor, inténtelo de nuevo."
+      );
+    }
   };
 
   return (
@@ -46,13 +93,14 @@ export default function AddService() {
             className="w-full border rounded py-[14px]"
           >
             <option value="">Selecciona un servicio</option>
-            <option value="Limpieza del hogar">Limpieza del hogar</option>
-            <option value="Mantenimiento del jardín">
-              Mantenimiento del jardín
-            </option>
-            <option value="Organización del hogar">
-              Organización del hogar
-            </option>
+            {services.map((service, index) => (
+              <option
+                key={index}
+                value={service.service}
+              >
+                {service.service}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -106,7 +154,7 @@ export default function AddService() {
           className="w-full border rounded p-[14px] bg-black text-white md:w-1/2 xl:w-1/3"
           type="submit"
         >
-          Agregar Servicio
+          {isFormSubmitted ? "Servicio Agregado" : "Agregar Servicio"}
         </button>
       </form>
     </section>

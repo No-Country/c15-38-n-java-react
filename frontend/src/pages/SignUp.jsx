@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registrarUsuario } from "/api/api.js";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,10 +21,13 @@ export default function SignUp() {
     try {
       const response = await registrarUsuario(formData);
 
-      // Manejp de respuesta
+      // Handle the response
       console.log("Registro exitoso:", response);
+
+      // Redirect to the /providerDashboard route
+      navigate("/providerDashboard");
     } catch (error) {
-      // Manejo de errores
+      // Handle errors
       console.error("Error al registrar:", error);
     }
   };

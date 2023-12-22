@@ -23,11 +23,15 @@ function App() {
               element={<HomeCleaning />}
             />
             <Route
-              path="/gardeningServices"
+              path="/Limpiezadelhogar"
+              element={<HomeCleaning />}
+            />
+            <Route
+              path="/Mantenimientodeljardín"
               element={<GardeningServices />}
             />
             <Route
-              path="/homeOrganization"
+              path="/Organizacióndelhogar"
               element={<HomeOrganization />}
             />
             <Route
