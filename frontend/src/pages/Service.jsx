@@ -20,9 +20,9 @@ const ServiceData = {
 export default function Service() {
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="mt-[150px] lg:max-w-[59rem] px-4 md:px-10 lg:px-0 xl:max-w-[80rem] 2xl:max-w-[90rem] mx-auto mb-16">
 
-      <div className="border rounded m-[10px]">
+      <div className="w-full border rounded m-[10px]">
         <h2>ProviderData</h2>
         <ProviderDataCard
           name={ProviderData.name}

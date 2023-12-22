@@ -40,10 +40,10 @@ function App() {
               element={<SignUp />}
             />
             <Route
-
               path="/service"
               element={<Service />}
-
+            />
+            <Route
               path="/providerDashboard"
               element={<ProviderDashboard />}
             />

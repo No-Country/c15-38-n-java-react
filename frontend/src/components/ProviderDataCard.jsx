@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const ProviderDataCard = ({ name, contact, email, image }) => (
-  <div className="w-full flex flex-wrap items-center p-[10px]">
+  <div className="w-full flex flex-wrap items-center justify-center p-[10px]">
 
     <img
       className="rounded-lg object-cover w-48 h-48 mx-[10px] my-[10px]"
