@@ -2,19 +2,23 @@ import ServiceCard from "../components/ServiceCardComponent/ServiceCard";
 
 const HomeCleaningData = [
   {
-    title: "Ejemplo 1",
+    title: "Limpieza de pisos",
+    description: "Buen trabajo con pisos blancos",
     image: "/images/1.jpg",
   },
   {
-    title: "Ejemplo 2",
+    title: "Limpieza de muebles",
+    description: "Conocimiento en todo dipo de manchas",
     image: "/images/2.jpg",
   },
   {
-    title: "Ejemplo 3",
+    title: "Limpieza del hogar",
+    description: "Rutina de limpieza y orden del hogar",
     image: "/images/3.jpg",
   },
   {
-    title: "Ejemplo 4",
+    title: "Limpieza de pisos",
+    description: "Trabajo en ceramicas, azulejos y madera",
     image: "/images/4.jpg",
   },
 ];
@@ -32,7 +36,7 @@ export default function HomeCleaning() {
                 key={index}
                 title={project.title}
                 image={project.image}
-                additionalContent={<p>Additional content for Home Cleaning</p>}
+                additionalContent={project.description}
               />
             ))}
           </div>

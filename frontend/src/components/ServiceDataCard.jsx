@@ -23,11 +23,6 @@ const ServiceDataCard = ({ title, description, precio, image }) => (
         src={image}
         alt={title}
       />
-      <img
-        className="rounded-lg object-cover w-80 h-80 mx-[10px] my-[5px]"
-        src={image}
-        alt={title}
-      />
     </div>
   </div>
 );
