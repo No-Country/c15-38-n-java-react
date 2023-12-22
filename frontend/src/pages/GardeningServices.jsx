@@ -2,19 +2,23 @@ import ServiceCard from "../components/ServiceCardComponent/ServiceCard";
 
 const GardeningServicesData = [
   {
-    title: "Ejemplo",
+    title: "Cuidado de jardín",
+    description: "Limpieza de maleza",
     image: "./images/download 1.jpg",
   },
   {
-    title: "Ejemplo",
+    title: "Siembra de jardín",
+    description: "Todo tipo de plantas",
     image: "./images/download 2.jpg",
   },
   {
-    title: "Ejemplo",
+    title: "Corte de césped",
+    description: "Uso de cortadora de césped",
     image: "./images/download 3.jpg",
   },
   {
-    title: "Ejemplo",
+    title: "Podar arbustos",
+    description: "Uso de tijeras",
     image: "./images/download 4.jpg",
   },
 ];
@@ -32,7 +36,7 @@ export default function GardeningServices() {
                 key={index}
                 title={project.title}
                 image={project.image}
-                additionalContent={<p>Additional content for Home Cleaning</p>}
+                additionalContent={project.description}
               />
             ))}
           </div>

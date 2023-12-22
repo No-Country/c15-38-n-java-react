@@ -2,7 +2,7 @@ import ServiceDataCard from "../components/ServiceDataCard";
 import ProviderDataCard from "../components/ProviderDataCard";
 
 const ServiceData = {
-      title: "Dropdown de servicios: 1 Mantenimiento del jardín",
+      title: "Dropdown de servicios:  Mantenimiento del jardín",
       description: "Corte en figuras",
       precio: "20 dolares",
       image: "./images/download 4.jpg",
