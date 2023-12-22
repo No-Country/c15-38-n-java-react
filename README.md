@@ -136,7 +136,7 @@ ServiLink es una aplicación que te ayuda a mantener tu hogar en óptimas condic
 
 ## 🎬 Video Promocional
 <a href="https://youtu.be/1QxirRAjJ6o" target="_blank">
-    <img src="https://github.com/No-Country/c15-38-n-java-react/assets/95196431/32a12f8e-af08-4c31-bbc4-51ef90092e81"/>
+    <img src="https://github.com/No-Country/c15-38-n-java-react/assets/95196431/03ca9a4c-1d01-4223-bd12-0b36f94c87c5"/>
 </a>
 <br>
 
