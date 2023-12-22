@@ -30,7 +30,6 @@ ServiLink es una aplicación que te ayuda a mantener tu hogar en óptimas condic
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=black"/>
   <img src="https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=HTML5&logoColor=white"/>
   <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white"/>
   <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/>
 </div>
 <br>
@@ -89,14 +88,14 @@ ServiLink es una aplicación que te ayuda a mantener tu hogar en óptimas condic
     <td>
       <div align="center">
         <a href="https://github.com/patinoricar" target="_blank" rel="author">
-          <img width="110" src="https://github.com/No-Country/c15-38-n-java-react/assets/95196431/25580b9e-b7a1-4979-af86-287cca0b2ae9"/>
+          <img width="110" src="https://github.com/No-Country/c15-38-n-java-react/assets/95196431/30826316-9496-4666-b60f-460c08e1a2d5"/>
         </a>
           <h4 style="margin-top: 1rem;">Ricar Patiño</h4>
           <h5 style="margin-top: 1rem;">Front-End  |  Project Manager</h5>
         <a href="https://github.com/patinoricar" target="_blank">
           <img src="https://img.shields.io/static/v1?style=for-the-badge&message=GitHub&color=172B4D&logo=GitHub&logoColor=FFFFFF&label="/>
         </a>
-        <a href="" target="_blank">
+        <a href="https://www.linkedin.com/in/patinoricar/" target="_blank">
           <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
         </a>
       </div>
