@@ -20,7 +20,7 @@ const ServiceData = {
 export default function Service() {
 
   return (
-    <div className="flex flex-col items-center">
+    <section className="flex flex-col items-center">
 
       <div className="border rounded m-[10px]">
         <h2>ProviderData</h2>
@@ -42,6 +42,6 @@ export default function Service() {
         />
       </div>
 
-    </div>
+    </section>
   );
 }
